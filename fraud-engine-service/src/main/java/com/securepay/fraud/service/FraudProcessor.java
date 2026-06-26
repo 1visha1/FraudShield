@@ -1,0 +1,66 @@
+package com.securepay.fraud.service;
+
+import com.securepay.fraud.cache.FraudContextCache;
+import com.securepay.fraud.entity.FraudDecision;
+import com.securepay.fraud.event.FraudDetectedEvent;
+import com.securepay.fraud.publisher.FraudPublisher;
+import com.securepay.fraud.repository.FraudDecisionRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class FraudProcessor {
+
+    private final FraudContextCache cache;
+    private final FraudScoringService scoringService;
+    private final FraudPublisher publisher;
+    private final FraudDecisionRepository repository;
+
+    public void process(UUID transactionId) {
+        try {
+            log.info("Process start for txn: {}", transactionId);
+
+            if (!cache.ready(transactionId)) {
+                return;
+            }
+
+            Integer riskScore = cache.risk(transactionId);
+            Integer ruleScore = cache.rule(transactionId);
+            UUID customerId = cache.customerId(transactionId);
+
+            Integer fraudScore = scoringService.calculate(riskScore, ruleScore);
+            String decision = scoringService.decision(fraudScore);
+
+            FraudDecision saved = repository.save(
+                    FraudDecision.builder()
+                            .transactionId(transactionId)
+                            .customerId(customerId)
+                            .fraudScore(fraudScore)
+                            .decision(decision)
+                            .createdAt(LocalDateTime.now())
+                            .build());
+
+            log.info("Fraud Decision saved to DB: {}", saved.getId());
+
+            FraudDetectedEvent event = FraudDetectedEvent.builder()
+                    .transactionId(transactionId)
+                    .customerId(customerId)
+                    .fraudScore(fraudScore)
+                    .decision(decision)
+                    .matchedRules(cache.matchedRules(transactionId))
+                    .build();
+
+            log.info("Publishing FraudDetectedEvent: {}", event);
+            publisher.publish(event);
+
+        } catch (Exception e) {
+            log.error("CRITICAL ERROR in FraudProcessor for txn {}: {}", transactionId, e.getMessage(), e);
+        }
+    }
+}

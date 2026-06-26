@@ -1,0 +1,85 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${JWK_SET_URI:http://localhost:9000/oauth2/jwks}
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      
+      routes:
+        - id: authorization-server
+          uri: lb://authorization-server
+          predicates:
+            - Path=/oauth2/**
+
+        - id: transaction-service
+          uri: lb://transaction-service
+          predicates:
+            - Path=/api/v1/transactions/**
+
+        - id: device-auth-service
+          uri: lb://device-auth-service
+          predicates:
+            - Path=/api/v1/devices/**
+
+        - id: risk-engine-service
+          uri: lb://risk-engine-service
+          predicates:
+            - Path=/api/v1/risk/**
+
+        - id: rule-engine-service
+          uri: lb://rule-engine-service
+          predicates:
+            - Path=/api/v1/rules/**
+
+        - id: fraud-engine-service
+          uri: lb://fraud-engine-service
+          predicates:
+            - Path=/api/v1/fraud/**
+
+        - id: auth-orchestrator-service
+          uri: lb://auth-orchestrator-service
+          predicates:
+            - Path=/api/v1/auth/**
+
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/v1/otp/**
+
+        - id: audit-service
+          uri: lb://audit-service
+          predicates:
+            - Path=/api/v1/audit/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,gateway
+  endpoint:
+    gateway:
+      enabled: true
+    health:
+      show-details: always

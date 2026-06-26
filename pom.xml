@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.securepay</groupId>
+    <artifactId>securepay360</artifactId>
+    <version>1.0.0</version>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>device-auth-service</module>
+        <module>fraud-engine-service</module>
+        <module>risk-engine-service</module>
+        <module>rule-engine-service</module>
+        <module>transaction-service</module>
+        <module>auth-orchestrator-service</module>
+        <module>notification-service</module>
+        <module>audit-service</module>
+        <module>discovery-service</module>
+        <module>api-gateway</module>
+        <module>authorization-server</module>
+    </modules>
+</project>

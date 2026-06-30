@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    vault:
+      uri: ${VAULT_URI:http://localhost:8200}
+      token: ${VAULT_TOKEN:root} # Use a root token for local dev only
+      kv:
+        enabled: true
+        backend: secret
+        application-name: ${spring.application.name}

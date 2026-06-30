@@ -31,8 +31,7 @@ services:
     networks:
       - securepay-network
     healthcheck:
-      # More robust healthcheck: check Redis version to ensure Streams are supported
-      test: ["CMD", "redis-cli", "INFO", "server", "|", "grep", "redis_version:7"]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -83,11 +82,37 @@ services:
     restart: unless-stopped
     depends_on:
       elasticsearch:
-        condition: service_started
+        condition: service_healthy
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
     ports:
       - "5601:5601"
+    networks:
+      - securepay-network
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: securepay-zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - securepay-network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: securepay-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - securepay-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: securepay-grafana
+    ports:
+      - "3000:3000"
     networks:
       - securepay-network
 
@@ -97,10 +122,30 @@ services:
     container_name: discovery-service
     ports:
       - "8761:8761"
-    environment:
-      EUREKA_HOSTNAME: discovery-service
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  config-server:
+    build:
+      context: ./config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    networks:
+      - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   authorization-server:
     build:
@@ -112,12 +157,18 @@ services:
       postgres:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay?options=-c%20timezone=UTC
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api-gateway:
     build:
@@ -127,14 +178,21 @@ services:
       - "8080:8080"
     depends_on:
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
       authorization-server:
-        condition: service_started
+        condition: service_healthy
     environment:
-      EUREKA_URL: http://discovery-service:8761/eureka/
-      JWK_SET_URI: http://authorization-server:9000/oauth2/jwks
+      - SPRING_PROFILES_ACTIVE=default
+      - JWK_SET_URI=http://authorization-server:9000/oauth2/jwks
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   device-auth-service:
     build:
@@ -148,14 +206,18 @@ services:
       rabbitmq:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   transaction-service:
     build:
@@ -169,35 +231,39 @@ services:
       rabbitmq:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   risk-engine-service:
     build:
       context: ./risk-engine-service
     container_name: risk-engine-service
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   rule-engine-service:
     build:
@@ -206,82 +272,84 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      redis:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   fraud-engine-service:
     build:
       context: ./fraud-engine-service
     container_name: fraud-engine-service
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8085/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   auth-orchestrator-service:
     build:
       context: ./auth-orchestrator-service
     container_name: auth-orchestrator-service
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8086/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   notification-service:
     build:
       context: ./notification-service
     container_name: notification-service
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/securepay
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8087/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   audit-service:
     build:
@@ -293,16 +361,20 @@ services:
       rabbitmq:
         condition: service_healthy
       elasticsearch:
-        condition: service_started
+        condition: service_healthy
       discovery-service:
-        condition: service_started
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
     environment:
-      REDIS_HOST: redis
-      RABBITMQ_HOST: rabbitmq
-      ELASTICSEARCH_HOST: elasticsearch
-      EUREKA_URL: http://discovery-service:8761/eureka/
+      - SPRING_PROFILES_ACTIVE=default
     networks:
       - securepay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres-data:

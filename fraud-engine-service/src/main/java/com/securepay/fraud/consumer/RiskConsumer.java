@@ -17,7 +17,7 @@ public class RiskConsumer {
     private final FraudContextCache cache;
     private final FraudProcessor processor;
 
-    @RabbitListener(queues = RabbitMQConfig.RISK_QUEUE)
+    @RabbitListener(queues = RabbitMQConfig.RISK_ASSESSED_QUEUE)
     public void consume(RiskAssessedEvent event) {
         log.info("Received RiskAssessedEvent: {}", event);
         cache.saveRisk(

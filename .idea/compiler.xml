@@ -7,56 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
-        <module name="auth-orchestrator-service" />
+        <module name="risk-engine-service" />
+        <module name="config-server" />
+        <module name="rule-engine-service" />
         <module name="audit-service" />
         <module name="authorization-server" />
-        <module name="discovery-service" />
-      </profile>
-      <profile name="Annotation profile for fraud-engine-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
+        <module name="api-gateway" />
         <module name="fraud-engine-service" />
-      </profile>
-      <profile name="Annotation profile for notification-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
+        <module name="auth-orchestrator-service" />
+        <module name="discovery-service" />
         <module name="notification-service" />
-      </profile>
-      <profile name="Annotation profile for risk-engine-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
-        <module name="risk-engine-service" />
-      </profile>
-      <profile name="Annotation profile for rule-engine-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
-        <module name="rule-engine-service" />
-      </profile>
-      <profile name="Annotation profile for transaction-service (1)" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
-        <module name="transaction-service (1)" />
       </profile>
       <profile name="Annotation profile for securepay360" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -64,8 +24,8 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
+        <module name="transaction-service (1)" />
         <module name="device-auth-service" />
       </profile>
     </annotationProcessing>
@@ -80,6 +40,7 @@
       <module name="audit-service" options="-parameters" />
       <module name="auth-orchestrator-service" options="-parameters" />
       <module name="authorization-server" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="device-auth-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="fraud-engine-service" options="-parameters" />

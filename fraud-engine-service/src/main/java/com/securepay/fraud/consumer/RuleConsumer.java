@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -17,14 +18,14 @@ public class RuleConsumer {
     private final FraudContextCache cache;
     private final FraudProcessor processor;
 
-    @RabbitListener(queues = RabbitMQConfig.RULE_QUEUE)
+    @RabbitListener(queues = RabbitMQConfig.RULE_EVALUATED_QUEUE)
     public void consume(RuleEvaluatedEvent event) {
         log.info("Received RuleEvaluatedEvent: {}", event);
         cache.saveRule(
                 event.getTransactionId(),
-                event.getCustomerId(),
+                event.getCustomerId() != null ? UUID.fromString(event.getCustomerId()) : null,
                 event.getRuleScore(),
-                event.getMatchedRules());
+                java.util.Collections.emptyList());
 
         processor.process(event.getTransactionId());
     }

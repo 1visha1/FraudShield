@@ -5,10 +5,18 @@ spring:
   application:
     name: api-gateway
 
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
   security:
     oauth2:
       resourceserver:
         jwt:
+          # Must use http:// — Spring Security's JWT decoder does NOT support lb:// scheme.
+          # Use authorization-server container name for Docker compatibility.
           jwk-set-uri: ${JWK_SET_URI:http://localhost:9000/oauth2/jwks}
 
   cloud:
@@ -18,49 +26,58 @@ spring:
           enabled: true
           lower-case-service-id: true
       
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+
       routes:
+        # Auth routes — login/register through gateway for consistent security
+        - id: auth-server-login
+          uri: lb://AUTHORIZATION-SERVER
+          predicates:
+            - Path=/api/auth/**
+
         - id: authorization-server
-          uri: lb://authorization-server
+          uri: lb://AUTHORIZATION-SERVER
           predicates:
             - Path=/oauth2/**
 
         - id: transaction-service
-          uri: lb://transaction-service
+          uri: lb://TRANSACTION-SERVICE
           predicates:
             - Path=/api/v1/transactions/**
 
         - id: device-auth-service
-          uri: lb://device-auth-service
+          uri: lb://DEVICE-AUTH-SERVICE
           predicates:
             - Path=/api/v1/devices/**
 
         - id: risk-engine-service
-          uri: lb://risk-engine-service
+          uri: lb://RISK-ENGINE-SERVICE
           predicates:
             - Path=/api/v1/risk/**
 
         - id: rule-engine-service
-          uri: lb://rule-engine-service
+          uri: lb://RULE-ENGINE-SERVICE
           predicates:
             - Path=/api/v1/rules/**
 
         - id: fraud-engine-service
-          uri: lb://fraud-engine-service
+          uri: lb://FRAUD-ENGINE-SERVICE
           predicates:
             - Path=/api/v1/fraud/**
 
         - id: auth-orchestrator-service
-          uri: lb://auth-orchestrator-service
+          uri: lb://AUTH-ORCHESTRATOR-SERVICE
           predicates:
             - Path=/api/v1/auth/**
 
         - id: notification-service
-          uri: lb://notification-service
+          uri: lb://NOTIFICATION-SERVICE
           predicates:
-            - Path=/api/v1/otp/**
+            - Path=/api/v1/notifications/**
 
         - id: audit-service
-          uri: lb://audit-service
+          uri: lb://AUDIT-SERVICE
           predicates:
             - Path=/api/v1/audit/**
 

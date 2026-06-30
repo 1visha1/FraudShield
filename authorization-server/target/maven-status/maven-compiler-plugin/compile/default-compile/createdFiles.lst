@@ -1,0 +1,12 @@
+com\securepay\auth\dto\LoginResponse.class
+com\securepay\auth\repository\UserRepository.class
+com\securepay\auth\AuthorizationServerApplication.class
+com\securepay\auth\config\AuthorizationServerConfig.class
+com\securepay\auth\dto\LoginRequest.class
+com\securepay\auth\dto\ErrorResponse$ErrorResponseBuilder.class
+com\securepay\auth\dto\ErrorResponse.class
+com\securepay\auth\controller\AuthController.class
+com\securepay\auth\dto\LoginResponse$LoginResponseBuilder.class
+com\securepay\auth\entity\User.class
+com\securepay\auth\entity\User$UserBuilder.class
+com\securepay\auth\service\CustomUserDetailsService.class

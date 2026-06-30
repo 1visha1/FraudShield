@@ -50,10 +50,9 @@ public class FraudProcessor {
 
             FraudDetectedEvent event = FraudDetectedEvent.builder()
                     .transactionId(transactionId)
-                    .customerId(customerId)
+                    .customerId(customerId != null ? customerId.toString() : null)
                     .fraudScore(fraudScore)
                     .decision(decision)
-                    .matchedRules(cache.matchedRules(transactionId))
                     .build();
 
             log.info("Publishing FraudDetectedEvent: {}", event);

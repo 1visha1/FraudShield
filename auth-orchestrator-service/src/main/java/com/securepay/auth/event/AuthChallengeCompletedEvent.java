@@ -18,4 +18,5 @@ public class AuthChallengeCompletedEvent {
     private UUID authSessionId;
     private boolean verified;
     private LocalDateTime verifiedAt;
+    private String status;
 }

@@ -21,37 +21,88 @@ public class RabbitMQConfig {
 
     public static final String EXCHANGE = "securepay.exchange";
     public static final String ROUTING_KEY = "transaction.created";
-    
+
     public static final String CHALLENGE_COMPLETED_QUEUE = "transaction.challenge.completed.q";
     public static final String CHALLENGE_COMPLETED_KEY = "auth.challenge.completed";
+    public static final String CHALLENGE_COMPLETED_DLQ = "transaction.challenge.completed.dlq";
+    public static final String CHALLENGE_COMPLETED_RETRY_QUEUE = "transaction.challenge.completed.retry.q";
 
     public static final String BLOCKED_QUEUE = "transaction.blocked.q";
     public static final String BLOCKED_KEY = "transaction.blocked";
+    public static final String BLOCKED_DLQ = "transaction.blocked.dlq";
+    public static final String BLOCKED_RETRY_QUEUE = "transaction.blocked.retry.q";
 
     @Bean
     public TopicExchange exchange() {
         return new TopicExchange(EXCHANGE);
     }
 
+    // Challenge Completed Queue, DLQ, and Retry Queue
     @Bean
     public Queue challengeCompletedQueue() {
-        return new Queue(CHALLENGE_COMPLETED_QUEUE);
+        return QueueBuilder.durable(CHALLENGE_COMPLETED_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", CHALLENGE_COMPLETED_RETRY_QUEUE)
+                .build();
     }
 
+    @Bean
+    public Queue challengeCompletedDlq() {
+        return new Queue(CHALLENGE_COMPLETED_DLQ);
+    }
+
+    @Bean
+    public Queue challengeCompletedRetryQueue() {
+        return QueueBuilder.durable(CHALLENGE_COMPLETED_RETRY_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", CHALLENGE_COMPLETED_QUEUE)
+                .withArgument("x-message-ttl", 5000)
+                .build();
+    }
+
+    @Bean
+    public Binding challengeCompletedBinding() {
+        return BindingBuilder.bind(challengeCompletedQueue()).to(exchange()).with(CHALLENGE_COMPLETED_KEY);
+    }
+
+    @Bean
+    public Binding challengeCompletedDlqBinding() {
+        return BindingBuilder.bind(challengeCompletedDlq()).to(exchange()).with(CHALLENGE_COMPLETED_DLQ);
+    }
+
+    // Blocked Queue, DLQ, and Retry Queue
     @Bean
     public Queue blockedQueue() {
-        return new Queue(BLOCKED_QUEUE);
+        return QueueBuilder.durable(BLOCKED_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", BLOCKED_RETRY_QUEUE)
+                .build();
     }
 
     @Bean
-    public Binding challengeCompletedBinding(Queue challengeCompletedQueue, TopicExchange exchange) {
-        return BindingBuilder.bind(challengeCompletedQueue).to(exchange).with(CHALLENGE_COMPLETED_KEY);
+    public Queue blockedDlq() {
+        return new Queue(BLOCKED_DLQ);
     }
 
     @Bean
-    public Binding blockedBinding(Queue blockedQueue, TopicExchange exchange) {
-        return BindingBuilder.bind(blockedQueue).to(exchange).with(BLOCKED_KEY);
+    public Queue blockedRetryQueue() {
+        return QueueBuilder.durable(BLOCKED_RETRY_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", BLOCKED_QUEUE)
+                .withArgument("x-message-ttl", 5000)
+                .build();
     }
+
+    @Bean
+    public Binding blockedBinding() {
+        return BindingBuilder.bind(blockedQueue()).to(exchange()).with(BLOCKED_KEY);
+    }
+
+    @Bean
+    public Binding blockedDlqBinding() {
+        return BindingBuilder.bind(blockedDlq()).to(exchange()).with(BLOCKED_DLQ);
+    }
+
 
     @Bean
     public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
@@ -77,6 +128,7 @@ public class RabbitMQConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(messageConverter);
+        factory.setDefaultRequeueRejected(false);
         return factory;
     }
 

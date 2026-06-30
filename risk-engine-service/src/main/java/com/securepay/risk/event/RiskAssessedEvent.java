@@ -1,6 +1,9 @@
 package com.securepay.risk.event;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -10,21 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RiskAssessedEvent {
-
     private UUID transactionId;
-
-    private UUID customerId;
-
-    private Integer riskScore;
-
-    private String riskLevel;
-
-    // Required by Rule Engine
+    private String customerId;
     private BigDecimal amount;
-
-    // Required by Rule Engine
-    private Boolean deviceTrusted;
-
-    // Optional
-    private Integer deviceRiskScore;
+    private int riskScore;
 }

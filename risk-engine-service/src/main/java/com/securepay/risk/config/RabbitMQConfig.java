@@ -1,94 +1,66 @@
 package com.securepay.risk.config;
 
-import com.securepay.risk.event.DeviceVerifiedEvent;
-import com.securepay.risk.event.RiskAssessedEvent;
-import com.securepay.risk.event.TransactionCreatedEvent;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.DefaultClassMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Configuration
 public class RabbitMQConfig {
 
     public static final String EXCHANGE = "securepay.exchange";
-    public static final String TRANSACTION_QUEUE = "transaction.created.q";
-    public static final String DEVICE_QUEUE = "device.verified.q";
-    public static final String RISK_QUEUE = "risk.assessed.q";
+
+    public static final String TRANSACTION_CREATED_QUEUE = "risk.transaction.created.q";
+    public static final String TRANSACTION_CREATED_KEY = "transaction.created";
+    public static final String TRANSACTION_CREATED_DLQ = "risk.transaction.created.dlq";
+    public static final String TRANSACTION_CREATED_RETRY_QUEUE = "risk.transaction.created.retry.q";
+
+    public static final String RISK_ASSESSED_KEY = "risk.assessed";
 
     @Bean
     public TopicExchange exchange() {
         return new TopicExchange(EXCHANGE);
     }
 
+    // Transaction Created Queue, DLQ, and Retry Queue
     @Bean
-    public Queue transactionQueue() {
-        return QueueBuilder.durable(TRANSACTION_QUEUE).build();
+    public Queue transactionCreatedQueue() {
+        return QueueBuilder.durable(TRANSACTION_CREATED_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", TRANSACTION_CREATED_RETRY_QUEUE)
+                .build();
     }
 
     @Bean
-    public Queue deviceQueue() {
-        return QueueBuilder.durable(DEVICE_QUEUE).build();
+    public Queue transactionCreatedDlq() {
+        return new Queue(TRANSACTION_CREATED_DLQ);
     }
 
     @Bean
-    public Queue riskQueue() {
-        return QueueBuilder.durable(RISK_QUEUE).build();
+    public Queue transactionCreatedRetryQueue() {
+        return QueueBuilder.durable(TRANSACTION_CREATED_RETRY_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", TRANSACTION_CREATED_QUEUE)
+                .withArgument("x-message-ttl", 5000)
+                .build();
     }
 
     @Bean
-    public Binding transactionBinding(Queue transactionQueue, TopicExchange exchange) {
-        return BindingBuilder.bind(transactionQueue).to(exchange).with("transaction.created");
+    public Binding transactionCreatedBinding() {
+        return BindingBuilder.bind(transactionCreatedQueue()).to(exchange()).with(TRANSACTION_CREATED_KEY);
     }
 
     @Bean
-    public Binding deviceBinding(Queue deviceQueue, TopicExchange exchange) {
-        return BindingBuilder.bind(deviceQueue).to(exchange).with("device.verified");
-    }
-
-    @Bean
-    public Binding riskBinding(Queue riskQueue, TopicExchange exchange) {
-        return BindingBuilder.bind(riskQueue).to(exchange).with("risk.assessed");
+    public Binding transactionCreatedDlqBinding() {
+        return BindingBuilder.bind(transactionCreatedDlq()).to(exchange()).with(TRANSACTION_CREATED_DLQ);
     }
 
     @Bean
     public MessageConverter jsonMessageConverter() {
-        Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter();
-        converter.setClassMapper(classMapper());
-        return converter;
-    }
-
-    @Bean
-    public DefaultClassMapper classMapper() {
-        DefaultClassMapper classMapper = new DefaultClassMapper();
-        Map<String, Class<?>> idClassMapping = new HashMap<>();
-        
-        // Incoming mappings
-        idClassMapping.put("com.securepay.transaction.event.TransactionCreatedEvent", TransactionCreatedEvent.class);
-        idClassMapping.put("com.securepay.device.event.DeviceVerifiedEvent", DeviceVerifiedEvent.class);
-        
-        // Outgoing mapping (so Fraud service recognizes it)
-        idClassMapping.put("com.securepay.risk.event.RiskAssessedEvent", RiskAssessedEvent.class);
-        
-        classMapper.setIdClassMapping(idClassMapping);
-        classMapper.setTrustedPackages("*");
-        return classMapper;
-    }
-
-    @Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(jsonMessageConverter());
-        return factory;
+        return new Jackson2JsonMessageConverter();
     }
 
     @Bean

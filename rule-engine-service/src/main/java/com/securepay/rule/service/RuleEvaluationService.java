@@ -1,71 +1,58 @@
 package com.securepay.rule.service;
-import com.securepay.rule.dto.EvaluationResult;
-import com.securepay.rule.dto.RuleContext;
-import com.securepay.rule.entity.FraudRule;
-import com.securepay.rule.repository.FraudRuleRepository;
+
+import com.securepay.rule.config.RabbitMQConfig;
+import com.securepay.rule.event.RiskAssessedEvent;
+import com.securepay.rule.event.RuleEvaluatedEvent;
+import com.securepay.rule.model.Rule;
+import com.securepay.rule.repository.RuleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
+import lombok.extern.slf4j.Slf4j;
+import org.mvel2.MVEL;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RuleEvaluationService {
 
-    private final FraudRuleRepository repository;
+    private final RabbitTemplate rabbitTemplate;
+    private final RuleRepository ruleRepository;
 
-    public EvaluationResult evaluate(
-            RuleContext context) {
+    @RabbitListener(queues = RabbitMQConfig.RISK_ASSESSED_QUEUE)
+    public void evaluateRules(RiskAssessedEvent event) {
+        log.info("Evaluating rules for transaction: {}", event.getTransactionId());
 
+        List<Rule> rules = ruleRepository.findAllByEnabledTrue();
         int totalScore = 0;
+        Map<String, Object> context = new HashMap<>();
+        context.put("amount", event.getAmount());
+        context.put("riskScore", event.getRiskScore());
 
-        List<String> matched =
-                new ArrayList<>();
-
-        ExpressionParser parser =
-                new SpelExpressionParser();
-
-        StandardEvaluationContext evalContext =
-                new StandardEvaluationContext();
-
-        evalContext.setVariable(
-                "amount",
-                context.getAmount());
-
-        evalContext.setVariable(
-                "riskScore",
-                context.getRiskScore());
-
-        evalContext.setVariable(
-                "deviceTrusted",
-                context.getDeviceTrusted());
-
-        List<FraudRule> rules =
-                repository.findByEnabledTrue();
-
-        for(FraudRule rule : rules) {
-
-            Boolean result =
-                    parser.parseExpression(
-                                    rule.getRuleExpression())
-                            .getValue(
-                                    evalContext,
-                                    Boolean.class);
-
-            if(Boolean.TRUE.equals(result)) {
-
-                totalScore += rule.getRiskScore();
-
-                matched.add(
-                        rule.getRuleName());
+        for (Rule rule : rules) {
+            try {
+                if ((Boolean) MVEL.eval(rule.getExpression(), context)) {
+                    totalScore += rule.getWeight();
+                }
+            } catch (Exception e) {
+                log.error("Error evaluating rule: {}", rule.getId(), e);
             }
         }
 
-        return new EvaluationResult(
-                totalScore,
-                matched);
+        RuleEvaluatedEvent ruleEvaluatedEvent = RuleEvaluatedEvent.builder()
+                .transactionId(event.getTransactionId())
+                .customerId(event.getCustomerId())
+                .amount(event.getAmount())
+                .riskScore(event.getRiskScore())
+                .ruleScore(totalScore)
+                .build();
+
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.RULE_EVALUATED_KEY, ruleEvaluatedEvent);
+        log.info("Published RuleEvaluatedEvent for transaction: {}", event.getTransactionId());
     }
 }

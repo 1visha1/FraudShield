@@ -4,7 +4,7 @@ import com.securepay.audit.model.AuditEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.stream.RecordId;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 public class AuditStreamService {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final StringRedisTemplate redisTemplate;
 
     public void publish(AuditEvent event) {
         log.info("Publishing to Redis Stream: {}", event);

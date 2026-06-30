@@ -1,13 +1,6 @@
 package com.securepay.rule.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.MessageDeliveryMode;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
-import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -20,70 +13,60 @@ public class RabbitMQConfig {
 
     public static final String EXCHANGE = "securepay.exchange";
 
-    public static final String RULE_QUEUE = "rule.evaluated.q";
-    public static final String RULE_ROUTING_KEY = "rule.evaluated";
+    public static final String RISK_ASSESSED_QUEUE = "rule.risk.assessed.q";
+    public static final String RISK_ASSESSED_KEY = "risk.assessed";
+    public static final String RISK_ASSESSED_DLQ = "rule.risk.assessed.dlq";
+    public static final String RISK_ASSESSED_RETRY_QUEUE = "rule.risk.assessed.retry.q";
 
-    public static final String FRAUD_QUEUE = "fraud.detected.q";
-    public static final String FRAUD_KEY = "fraud.detected";
+    public static final String RULE_EVALUATED_KEY = "rule.evaluated";
 
     @Bean
     public TopicExchange exchange() {
-        return new TopicExchange(EXCHANGE, true, false);
+        return new TopicExchange(EXCHANGE);
+    }
+
+    // Risk Assessed Queue, DLQ, and Retry Queue
+    @Bean
+    public Queue riskAssessedQueue() {
+        return QueueBuilder.durable(RISK_ASSESSED_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", RISK_ASSESSED_RETRY_QUEUE)
+                .build();
     }
 
     @Bean
-    public Queue ruleQueue() {
-        return QueueBuilder.durable(RULE_QUEUE).build();
+    public Queue riskAssessedDlq() {
+        return new Queue(RISK_ASSESSED_DLQ);
     }
 
     @Bean
-    public Binding ruleBinding() {
-        return BindingBuilder.bind(ruleQueue())
-                .to(exchange())
-                .with(RULE_ROUTING_KEY);
+    public Queue riskAssessedRetryQueue() {
+        return QueueBuilder.durable(RISK_ASSESSED_RETRY_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", RISK_ASSESSED_QUEUE)
+                .withArgument("x-message-ttl", 5000)
+                .build();
     }
 
     @Bean
-    public Queue fraudQueue() {
-        return QueueBuilder.durable(FRAUD_QUEUE).build();
+    public Binding riskAssessedBinding() {
+        return BindingBuilder.bind(riskAssessedQueue()).to(exchange()).with(RISK_ASSESSED_KEY);
     }
 
     @Bean
-    public Binding fraudBinding() {
-        return BindingBuilder.bind(fraudQueue())
-                .to(exchange())
-                .with(FRAUD_KEY);
+    public Binding riskAssessedDlqBinding() {
+        return BindingBuilder.bind(riskAssessedDlq()).to(exchange()).with(RISK_ASSESSED_DLQ);
     }
 
     @Bean
-    public MessageConverter messageConverter(ObjectMapper objectMapper) {
-        return new Jackson2JsonMessageConverter(objectMapper);
+    public MessageConverter jsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(
-            ConnectionFactory connectionFactory,
-            MessageConverter messageConverter) {
-
-        RabbitTemplate rabbitTemplate =
-                new RabbitTemplate(connectionFactory);
-
-        rabbitTemplate.setMessageConverter(messageConverter);
-
-        return rabbitTemplate;
-    }
-
-    @Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
-            ConnectionFactory connectionFactory,
-            MessageConverter messageConverter) {
-
-        SimpleRabbitListenerContainerFactory factory =
-                new SimpleRabbitListenerContainerFactory();
-
-        factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(messageConverter);
-
-        return factory;
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        template.setMessageConverter(jsonMessageConverter());
+        return template;
     }
 }

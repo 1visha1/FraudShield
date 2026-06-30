@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'spring-micrometer'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [
+          'api-gateway:8080',
+          'authorization-server:9000',
+          'device-auth-service:8082',
+          'transaction-service:8081',
+          'risk-engine-service:8083',
+          'rule-engine-service:8084',
+          'fraud-engine-service:8085',
+          'auth-orchestrator-service:8086',
+          'notification-service:8087',
+          'audit-service:8088'
+        ]

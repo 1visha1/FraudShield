@@ -10,6 +10,7 @@ import com.securepay.risk.service.RiskCalculationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+import com.securepay.risk.config.RabbitMQConfig;
 
 import java.time.LocalDateTime;
 
@@ -25,16 +26,17 @@ public class TransactionConsumer {
 
     private final DeviceRiskCache deviceRiskCache;
 
-    @RabbitListener(queues = "transaction.created.q")
+    @RabbitListener(queues = RabbitMQConfig.TRANSACTION_CREATED_QUEUE)
     public void consume(TransactionCreatedEvent event) {
+        java.util.UUID customerId = event.getCustomerId() != null ? java.util.UUID.fromString(event.getCustomerId()) : null;
 
         Integer deviceRisk =
-                deviceRiskCache.get(event.getCustomerId());
+                deviceRiskCache.get(customerId);
 
         Integer score =
                 service.calculateRisk(
                         event.getAmount(),
-                        event.getCustomerId());
+                        customerId);
 
         String level =
                 service.riskLevel(score);
@@ -42,7 +44,7 @@ public class TransactionConsumer {
         RiskAssessment assessment =
                 RiskAssessment.builder()
                         .transactionId(event.getTransactionId())
-                        .customerId(event.getCustomerId())
+                        .customerId(customerId)
                         .riskScore(score)
                         .riskLevel(level)
                         .assessedAt(LocalDateTime.now())
@@ -56,12 +58,6 @@ public class TransactionConsumer {
                         .customerId(event.getCustomerId())
                         .amount(event.getAmount())
                         .riskScore(score)
-                        .riskLevel(level)
-
-                        // Temporary value
-                        .deviceTrusted(false)
-
-                        .deviceRiskScore(deviceRisk)
                         .build();
 
         publisher.publish(riskEvent);

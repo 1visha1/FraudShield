@@ -96,6 +96,23 @@ public class AuthOrchestratorService {
         }, () -> log.error("AuthSession not found for transaction: {}", transactionId));
     }
 
+    @Transactional
+    public void handleChallengeCompletion(UUID transactionId, String status) {
+        repository.findByTransactionId(transactionId).ifPresentOrElse(session -> {
+            if ("COMPLETED".equals(status)) {
+                session.setStatus("COMPLETED");
+                repository.save(session);
+                log.info("MFA Challenge COMPLETED for txn: {}", transactionId);
+                publishCompletion(session.getTransactionId(), session.getCustomerId(), session.getId());
+            } else {
+                session.setStatus("FAILED");
+                repository.save(session);
+                log.warn("MFA Challenge FAILED for txn: {}", transactionId);
+                publishBlock(session.getTransactionId(), session.getCustomerId(), "MFA challenge failed");
+            }
+        }, () -> log.error("AuthSession not found for transaction: {}", transactionId));
+    }
+
     private void publishCompletion(UUID transactionId, UUID customerId, UUID authSessionId) {
         AuthChallengeCompletedEvent event = AuthChallengeCompletedEvent.builder()
                 .transactionId(transactionId)

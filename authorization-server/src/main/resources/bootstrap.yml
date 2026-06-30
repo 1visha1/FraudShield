@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: authorization-server
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
+      username: configUser
+      password: ${CONFIG_SERVER_PASSWORD:default_password}
+      fail-fast: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 20
+        max-interval: 2000
+        multiplier: 1.1

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
@@ -13,14 +13,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FraudDetectedEvent {
-
     private UUID transactionId;
-
-    private UUID customerId;
-
-    private Integer fraudScore;
-
+    private String customerId;
+    private BigDecimal amount;
+    private int fraudScore;
     private String decision;
-
-    private List<String> matchedRules;
 }

@@ -211,4 +211,32 @@ RabbitMQ
                  ▼
            Audit Service
 ```
+## 📚 Documentation
 
+### Core Infrastructure
+
+| Component | Documentation |
+|-----------|---------------|
+| API Gateway | [README](./api-gateway/README.md) |
+| Authorization Server | [README](./authorization-server/README.md) |
+| Discovery Service | [README](./discovery-service/README.md) |
+| Config Server | [README](./config-server/README.md) |
+
+### Business Services
+
+| Service | Documentation |
+|---------|---------------|
+| Auth Orchestrator Service | [README](./auth-orchestrator-service/README.md) |
+| Device Authentication Service | [README](./device-auth-service/README.md) |
+| Risk Engine Service | [README](./risk-engine-service/README.md) |
+| Rule Engine Service | [README](./rule-engine-service/README.md) |
+| Fraud Engine Service | [README](./fraud-engine-service/README.md) |
+| Notification Service | [README](./notification-service/README.md) |
+| Audit Service | [README](./audit-service/README.md) |
+
+### Repository Documentation
+
+- [Project Context](./PROJECT_CONTEXT.md)
+- [Project Status Report](./PROJECT_STATUS_REPORT.md)
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
+- [Security Policy](./SECURITY.md)

@@ -30,6 +30,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="common-events" target="1.8" />
+      <module name="securepay-common" target="1.8" />
+      <module name="shared" target="1.5" />
       <module name="spring" target="17" />
       <module name="transaction-service" target="17" />
     </bytecodeTargetLevel>

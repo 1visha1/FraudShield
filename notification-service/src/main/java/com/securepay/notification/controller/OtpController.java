@@ -1,15 +1,16 @@
 package com.securepay.notification.controller;
 
 import com.securepay.notification.dto.OtpVerificationRequest;
+import com.securepay.notification.dto.OtpVerificationResponse;
 import com.securepay.notification.event.AuthChallengeCompletedEvent;
 import com.securepay.notification.service.OtpCacheService;
+import com.securepay.notification.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -23,36 +24,74 @@ public class OtpController {
     private final RabbitTemplate rabbitTemplate;
 
     @PostMapping("/verify")
-    public String verify(@RequestBody OtpVerificationRequest request) {
-        log.info("Received OTP verification request for transaction: {}", request.getTransactionId());
+    public ResponseEntity<ApiResponse<OtpVerificationResponse>> verify(
+            @RequestBody OtpVerificationRequest request) {
+
+        log.info("Received OTP verification request for transaction: {}",
+                request.getTransactionId());
 
         String stored = cache.get(request.getTransactionId());
 
         if (stored == null) {
-            log.warn("OTP expired or not found for transaction: {}", request.getTransactionId());
+
             publishCompletion(request.getTransactionId(), "FAILED");
-            return "OTP_EXPIRED";
+
+            return ResponseEntity.status(HttpStatus.GONE)
+                    .body(ApiResponse.<OtpVerificationResponse>builder()
+                            .success(false)
+                            .message("OTP has expired.")
+                            .data(OtpVerificationResponse.builder()
+                                    .transactionId(request.getTransactionId())
+                                    .status("OTP_EXPIRED")
+                                    .build())
+                            .build());
         }
 
         if (!stored.equals(request.getOtp())) {
-            log.warn("Invalid OTP entered for transaction: {}", request.getTransactionId());
+
             publishCompletion(request.getTransactionId(), "FAILED");
-            return "OTP_INVALID";
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.<OtpVerificationResponse>builder()
+                            .success(false)
+                            .message("Invalid OTP.")
+                            .data(OtpVerificationResponse.builder()
+                                    .transactionId(request.getTransactionId())
+                                    .status("OTP_INVALID")
+                                    .build())
+                            .build());
         }
 
         cache.delete(request.getTransactionId());
-        log.info("OTP verified successfully for transaction: {}", request.getTransactionId());
 
         publishCompletion(request.getTransactionId(), "COMPLETED");
-        return "OTP_VERIFIED";
+
+        return ResponseEntity.ok(
+                ApiResponse.<OtpVerificationResponse>builder()
+                        .success(true)
+                        .message("OTP verified successfully.")
+                        .data(OtpVerificationResponse.builder()
+                                .transactionId(request.getTransactionId())
+                                .status("OTP_VERIFIED")
+                                .build())
+                        .build());
     }
 
     private void publishCompletion(UUID transactionId, String status) {
+
         AuthChallengeCompletedEvent event = AuthChallengeCompletedEvent.builder()
                 .transactionId(transactionId)
                 .status(status)
                 .build();
-        rabbitTemplate.convertAndSend("securepay.exchange", "auth.challenge.completed.notification", event);
-        log.info("Published AuthChallengeCompletedEvent to orchestrator: transaction={}, status={}", transactionId, status);
+
+        rabbitTemplate.convertAndSend(
+                "securepay.exchange",
+                "auth.challenge.completed.notification",
+                event);
+
+        log.info(
+                "Published AuthChallengeCompletedEvent: transaction={}, status={}",
+                transactionId,
+                status);
     }
 }

@@ -1,6 +1,7 @@
 package com.securepay.transaction.exception;
 
 import com.securepay.transaction.util.ApiResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(TransactionNotFoundException.class)
@@ -57,6 +59,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGlobalException(
             Exception ex, WebRequest request) {
+        log.error("Unhandled exception on {}: {}", request.getDescription(false), ex.getMessage(), ex);
         ApiResponse<Object> response = ApiResponse.builder()
                 .success(false)
                 .message("An unexpected error occurred")

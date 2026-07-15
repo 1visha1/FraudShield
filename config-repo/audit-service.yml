@@ -23,7 +23,7 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:postgresql://localhost:5432/securepay
+    url: jdbc:postgresql://postgres:5432/securepay
   rabbitmq:
     host: localhost
   redis:

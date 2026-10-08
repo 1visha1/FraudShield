@@ -1,4 +1,4 @@
-package com.securepay.audit.model;
+﻿package com.fraudshield.audit.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

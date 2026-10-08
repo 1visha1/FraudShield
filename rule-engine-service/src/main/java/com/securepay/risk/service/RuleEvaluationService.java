@@ -1,10 +1,10 @@
-package com.securepay.risk.service;
+﻿package com.fraudshield.risk.service;
 
-import com.securepay.risk.config.RabbitMQConfig;
-import com.securepay.risk.event.RiskAssessedEvent;
-import com.securepay.risk.event.RuleEvaluatedEvent;
-import com.securepay.risk.model.Rule;
-import com.securepay.risk.repository.RuleRepository;
+import com.fraudshield.risk.config.RabbitMQConfig;
+import com.fraudshield.risk.event.RiskAssessedEvent;
+import com.fraudshield.risk.event.RuleEvaluatedEvent;
+import com.fraudshield.risk.model.Rule;
+import com.fraudshield.risk.repository.RuleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mvel2.MVEL;

@@ -1,6 +1,6 @@
-package com.securepay.fraud.publisher;
+﻿package com.fraudshield.fraud.publisher;
 
-import com.securepay.fraud.event.FraudDetectedEvent;
+import com.fraudshield.fraud.event.FraudDetectedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,7 +40,7 @@ class FraudPublisherTest {
         fraudPublisher.publish(event);
 
         verify(rabbitTemplate).convertAndSend(
-                "securepay.exchange",
+                "fraudshield.exchange",
                 "fraud.detected",
                 event
         );

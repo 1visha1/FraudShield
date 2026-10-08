@@ -1,10 +1,10 @@
-package com.securepay.notification.service;
+﻿package com.fraudshield.notification.service;
 
-import com.securepay.notification.dto.OtpVerificationRequest;
-import com.securepay.notification.dto.OtpVerificationResponse;
-import com.securepay.notification.event.OtpVerifiedEvent;
-import com.securepay.notification.exception.OtpExpiredException;
-import com.securepay.notification.exception.OtpInvalidException;
+import com.fraudshield.notification.dto.OtpVerificationRequest;
+import com.fraudshield.notification.dto.OtpVerificationResponse;
+import com.fraudshield.notification.event.OtpVerifiedEvent;
+import com.fraudshield.notification.exception.OtpExpiredException;
+import com.fraudshield.notification.exception.OtpInvalidException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -37,7 +37,7 @@ public class OtpService {
         log.info("OTP verified successfully for transaction: {}", request.getTransactionId());
 
         // Notify Auth Orchestrator to update session and continue flow
-        rabbitTemplate.convertAndSend("securepay.exchange", "otp.verified",
+        rabbitTemplate.convertAndSend("fraudshield.exchange", "otp.verified",
                 OtpVerifiedEvent.builder().transactionId(request.getTransactionId()).build());
 
         return OtpVerificationResponse.builder().status("OTP_VERIFIED").build();

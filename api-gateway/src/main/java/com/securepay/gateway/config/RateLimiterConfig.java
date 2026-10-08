@@ -1,4 +1,4 @@
-package com.securepay.gateway.config;
+﻿package com.fraudshield.gateway.config;
 
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;

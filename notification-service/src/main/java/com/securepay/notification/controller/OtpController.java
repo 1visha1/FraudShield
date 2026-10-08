@@ -1,10 +1,10 @@
-package com.securepay.notification.controller;
+﻿package com.fraudshield.notification.controller;
 
-import com.securepay.notification.dto.OtpVerificationRequest;
-import com.securepay.notification.dto.OtpVerificationResponse;
-import com.securepay.notification.event.AuthChallengeCompletedEvent;
-import com.securepay.notification.service.OtpCacheService;
-import com.securepay.notification.util.ApiResponse;
+import com.fraudshield.notification.dto.OtpVerificationRequest;
+import com.fraudshield.notification.dto.OtpVerificationResponse;
+import com.fraudshield.notification.event.AuthChallengeCompletedEvent;
+import com.fraudshield.notification.service.OtpCacheService;
+import com.fraudshield.notification.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -85,7 +85,7 @@ public class OtpController {
                 .build();
 
         rabbitTemplate.convertAndSend(
-                "securepay.exchange",
+                "fraudshield.exchange",
                 "auth.challenge.completed.notification",
                 event);
 

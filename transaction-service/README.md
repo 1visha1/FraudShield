@@ -48,7 +48,7 @@ The **Transaction Service** is the primary entry point for all payment transacti
 transaction-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/transaction/
+└── src/main/java/com/fraudshield/transaction/
     ├── TransactionServiceApplication.java
     ├── config/
     │   └── RabbitMQConfig.java       # Queue and exchange declarations
@@ -154,7 +154,7 @@ POST /api/v1/transactions
           |
   2. INSERT INTO transactions (status=PENDING)
           |
-  3. PUBLISH transaction.created -> securepay.exchange
+  3. PUBLISH transaction.created -> fraudshield.exchange
           |
   Return TransactionResponse {id, status:PENDING}
 ```
@@ -183,7 +183,7 @@ spring:
   application:
     name: transaction-service
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
   rabbitmq:

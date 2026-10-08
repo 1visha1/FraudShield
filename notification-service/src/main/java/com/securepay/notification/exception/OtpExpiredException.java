@@ -1,4 +1,4 @@
-package com.securepay.notification.exception;
+﻿package com.fraudshield.notification.exception;
 
 public class OtpExpiredException extends RuntimeException {
 

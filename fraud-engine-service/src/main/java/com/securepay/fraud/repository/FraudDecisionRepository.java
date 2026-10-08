@@ -1,5 +1,5 @@
-package com.securepay.fraud.repository;
-import com.securepay.fraud.entity.FraudDecision;
+﻿package com.fraudshield.fraud.repository;
+import com.fraudshield.fraud.entity.FraudDecision;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

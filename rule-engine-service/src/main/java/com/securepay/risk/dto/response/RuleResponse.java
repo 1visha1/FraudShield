@@ -1,4 +1,4 @@
-package com.securepay.risk.dto.response;
+﻿package com.fraudshield.risk.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

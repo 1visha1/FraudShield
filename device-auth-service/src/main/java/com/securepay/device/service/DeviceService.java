@@ -1,18 +1,18 @@
-package com.securepay.device.service;
+﻿package com.fraudshield.device.service;
 
-import com.securepay.device.cache.DeviceCacheService;
-import com.securepay.device.dto.*;
-import com.securepay.device.entity.TrustedDevice;
-import com.securepay.device.event.DeviceVerifiedEvent;
-import com.securepay.device.repository.TrustedDeviceRepository;
-import com.securepay.device.util.FingerprintUtil;
+import com.fraudshield.device.cache.DeviceCacheService;
+import com.fraudshield.device.dto.*;
+import com.fraudshield.device.entity.TrustedDevice;
+import com.fraudshield.device.event.DeviceVerifiedEvent;
+import com.fraudshield.device.repository.TrustedDeviceRepository;
+import com.fraudshield.device.util.FingerprintUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-import static com.securepay.device.config.RabbitMQConfig.*;
+import static com.fraudshield.device.config.RabbitMQConfig.*;
 
 @Service
 @RequiredArgsConstructor

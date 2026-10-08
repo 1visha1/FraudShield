@@ -1,6 +1,6 @@
-package com.securepay.auth.config;
+﻿package com.fraudshield.auth.config;
 
-import com.securepay.auth.entity.User;
+import com.fraudshield.auth.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,7 +1,7 @@
-package com.securepay.device.controller;
+﻿package com.fraudshield.device.controller;
 
-import com.securepay.device.dto.*;
-import com.securepay.device.service.DeviceService;
+import com.fraudshield.device.dto.*;
+import com.fraudshield.device.service.DeviceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

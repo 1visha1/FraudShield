@@ -1,5 +1,5 @@
-package com.securepay.risk.repository;
-import com.securepay.risk.entity.RiskAssessment;
+﻿package com.fraudshield.risk.repository;
+import com.fraudshield.risk.entity.RiskAssessment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

@@ -1,6 +1,6 @@
-package com.securepay.risk.repository;
+﻿package com.fraudshield.risk.repository;
 
-import com.securepay.risk.entity.FraudRule;
+import com.fraudshield.risk.entity.FraudRule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

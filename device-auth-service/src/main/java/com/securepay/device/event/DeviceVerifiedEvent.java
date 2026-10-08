@@ -1,4 +1,4 @@
-package com.securepay.device.event;
+﻿package com.fraudshield.device.event;
 
 import lombok.*;
 

@@ -1,11 +1,11 @@
-package com.securepay.auth.controller;
+﻿package com.fraudshield.auth.controller;
 
-import com.securepay.auth.dto.ErrorResponse;
-import com.securepay.auth.dto.LoginRequest;
-import com.securepay.auth.dto.LoginResponse;
-import com.securepay.auth.dto.RegistrationRequest;
-import com.securepay.auth.entity.User;
-import com.securepay.auth.repository.UserRepository;
+import com.fraudshield.auth.dto.ErrorResponse;
+import com.fraudshield.auth.dto.LoginRequest;
+import com.fraudshield.auth.dto.LoginResponse;
+import com.fraudshield.auth.dto.RegistrationRequest;
+import com.fraudshield.auth.entity.User;
+import com.fraudshield.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -53,7 +53,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final AuthorizationServerSettings authorizationServerSettings;
 
-    private static final String CLIENT_ID = "securepay-client";
+    private static final String CLIENT_ID = "fraudshield-client";
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Validated RegistrationRequest registrationRequest) {

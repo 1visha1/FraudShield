@@ -1,4 +1,4 @@
-package com.securepay.fraud.config;
+﻿package com.fraudshield.fraud.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

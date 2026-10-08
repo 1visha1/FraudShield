@@ -1,13 +1,13 @@
-package com.securepay.auth.service;
+﻿package com.fraudshield.auth.service;
 
-import com.securepay.auth.dto.AuthType;
-import com.securepay.auth.entity.AuthSession;
-import com.securepay.auth.event.AuthChallengeCompletedEvent;
-import com.securepay.auth.event.AuthChallengeCreatedEvent;
-import com.securepay.auth.event.FraudDetectedEvent;
-import com.securepay.auth.event.TransactionBlockedEvent;
-import com.securepay.auth.publisher.AuthChallengePublisher;
-import com.securepay.auth.repository.AuthSessionRepository;
+import com.fraudshield.auth.dto.AuthType;
+import com.fraudshield.auth.entity.AuthSession;
+import com.fraudshield.auth.event.AuthChallengeCompletedEvent;
+import com.fraudshield.auth.event.AuthChallengeCreatedEvent;
+import com.fraudshield.auth.event.FraudDetectedEvent;
+import com.fraudshield.auth.event.TransactionBlockedEvent;
+import com.fraudshield.auth.publisher.AuthChallengePublisher;
+import com.fraudshield.auth.repository.AuthSessionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -122,7 +122,7 @@ public class AuthOrchestratorService {
                 .verifiedAt(LocalDateTime.now())
                 .build();
         
-        rabbitTemplate.convertAndSend("securepay.exchange", "auth.challenge.completed", event);
+        rabbitTemplate.convertAndSend("fraudshield.exchange", "auth.challenge.completed", event);
     }
 
     private void publishBlock(UUID transactionId, UUID customerId, String reason) {
@@ -132,6 +132,6 @@ public class AuthOrchestratorService {
                 .reason(reason)
                 .build();
 
-        rabbitTemplate.convertAndSend("securepay.exchange", "transaction.blocked", event);
+        rabbitTemplate.convertAndSend("fraudshield.exchange", "transaction.blocked", event);
     }
 }

@@ -1,5 +1,5 @@
-package com.securepay.notification.publisher;
-import com.securepay.notification.event.AuthChallengeSentEvent;
+﻿package com.fraudshield.notification.publisher;
+import com.fraudshield.notification.event.AuthChallengeSentEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class NotificationPublisher {
             AuthChallengeSentEvent event){
 
         rabbitTemplate.convertAndSend(
-                "securepay.exchange",
+                "fraudshield.exchange",
                 "auth.challenge.sent",
                 event);
     }

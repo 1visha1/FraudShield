@@ -1,7 +1,7 @@
-package com.securepay.audit.service;
+﻿package com.fraudshield.audit.service;
 
-import com.securepay.audit.model.AuditEvent;
-import com.securepay.audit.repository.AuditEventRepository;
+import com.fraudshield.audit.model.AuditEvent;
+import com.fraudshield.audit.repository.AuditEventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

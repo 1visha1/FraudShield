@@ -1,6 +1,6 @@
-package com.securepay.fraud.repository;
+﻿package com.fraudshield.fraud.repository;
 
-import com.securepay.fraud.entity.FraudDecision;
+import com.fraudshield.fraud.entity.FraudDecision;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

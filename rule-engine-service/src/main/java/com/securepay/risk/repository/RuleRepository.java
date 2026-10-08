@@ -1,6 +1,6 @@
-package com.securepay.risk.repository;
+﻿package com.fraudshield.risk.repository;
 
-import com.securepay.risk.model.Rule;
+import com.fraudshield.risk.model.Rule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

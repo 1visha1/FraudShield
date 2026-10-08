@@ -1,6 +1,6 @@
-package com.securepay.audit.service;
+﻿package com.fraudshield.audit.service;
 
-import com.securepay.audit.model.AuditEvent;
+import com.fraudshield.audit.model.AuditEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.stream.RecordId;

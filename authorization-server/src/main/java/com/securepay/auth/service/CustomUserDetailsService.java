@@ -1,6 +1,6 @@
-package com.securepay.auth.service;
+﻿package com.fraudshield.auth.service;
 
-import com.securepay.auth.repository.UserRepository;
+import com.fraudshield.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

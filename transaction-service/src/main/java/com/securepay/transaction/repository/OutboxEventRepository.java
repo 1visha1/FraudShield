@@ -1,6 +1,6 @@
-package com.securepay.transaction.repository;
+﻿package com.fraudshield.transaction.repository;
 
-import com.securepay.transaction.entity.OutboxEvent;
+import com.fraudshield.transaction.entity.OutboxEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

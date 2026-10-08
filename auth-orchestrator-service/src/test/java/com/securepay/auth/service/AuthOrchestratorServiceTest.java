@@ -1,11 +1,11 @@
-package com.securepay.auth.service;
+﻿package com.fraudshield.auth.service;
 
-import com.securepay.auth.dto.AuthType;
-import com.securepay.auth.entity.AuthSession;
-import com.securepay.auth.event.AuthChallengeCreatedEvent;
-import com.securepay.auth.event.FraudDetectedEvent;
-import com.securepay.auth.publisher.AuthChallengePublisher;
-import com.securepay.auth.repository.AuthSessionRepository;
+import com.fraudshield.auth.dto.AuthType;
+import com.fraudshield.auth.entity.AuthSession;
+import com.fraudshield.auth.event.AuthChallengeCreatedEvent;
+import com.fraudshield.auth.event.FraudDetectedEvent;
+import com.fraudshield.auth.publisher.AuthChallengePublisher;
+import com.fraudshield.auth.repository.AuthSessionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

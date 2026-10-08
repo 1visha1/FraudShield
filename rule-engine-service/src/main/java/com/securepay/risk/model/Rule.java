@@ -1,4 +1,4 @@
-package com.securepay.risk.model;
+﻿package com.fraudshield.risk.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

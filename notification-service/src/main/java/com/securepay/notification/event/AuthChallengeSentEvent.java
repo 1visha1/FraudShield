@@ -1,4 +1,4 @@
-package com.securepay.notification.event;
+﻿package com.fraudshield.notification.event;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

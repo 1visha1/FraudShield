@@ -1,6 +1,6 @@
-package com.securepay.device.repository;
+﻿package com.fraudshield.device.repository;
 
-import com.securepay.device.entity.TrustedDevice;
+import com.fraudshield.device.entity.TrustedDevice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

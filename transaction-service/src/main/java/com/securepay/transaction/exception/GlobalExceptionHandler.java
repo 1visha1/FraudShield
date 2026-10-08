@@ -1,6 +1,6 @@
-package com.securepay.transaction.exception;
+﻿package com.fraudshield.transaction.exception;
 
-import com.securepay.transaction.util.ApiResponse;
+import com.fraudshield.transaction.util.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

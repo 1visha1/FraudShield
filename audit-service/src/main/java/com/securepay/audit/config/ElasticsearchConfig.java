@@ -1,4 +1,4 @@
-package com.securepay.audit.config;
+﻿package com.fraudshield.audit.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfigurat
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.securepay.audit.repository")
+@EnableElasticsearchRepositories(basePackages = "com.fraudshield.audit.repository")
 public class ElasticsearchConfig extends ElasticsearchConfiguration {
 
     @Value("${elasticsearch.host:localhost}")

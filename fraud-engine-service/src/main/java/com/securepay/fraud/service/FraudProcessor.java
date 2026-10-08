@@ -1,10 +1,10 @@
-package com.securepay.fraud.service;
+﻿package com.fraudshield.fraud.service;
 
-import com.securepay.fraud.cache.FraudContextCache;
-import com.securepay.fraud.entity.FraudDecision;
-import com.securepay.fraud.event.FraudDetectedEvent;
-import com.securepay.fraud.publisher.FraudPublisher;
-import com.securepay.fraud.repository.FraudDecisionRepository;
+import com.fraudshield.fraud.cache.FraudContextCache;
+import com.fraudshield.fraud.entity.FraudDecision;
+import com.fraudshield.fraud.event.FraudDetectedEvent;
+import com.fraudshield.fraud.publisher.FraudPublisher;
+import com.fraudshield.fraud.repository.FraudDecisionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

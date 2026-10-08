@@ -1,7 +1,7 @@
-package com.securepay.notification.service;
+﻿package com.fraudshield.notification.service;
 
-import com.securepay.notification.event.AuthChallengeCreatedEvent;
-import com.securepay.notification.event.OTPGeneratedEvent;
+import com.fraudshield.notification.event.AuthChallengeCreatedEvent;
+import com.fraudshield.notification.event.OTPGeneratedEvent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -55,7 +55,7 @@ class NotificationServiceTest {
                 ArgumentCaptor.forClass(OTPGeneratedEvent.class);
 
         verify(rabbitTemplate).convertAndSend(
-                eq("securepay.exchange"),
+                eq("fraudshield.exchange"),
                 eq("otp.generated"),
                 captor.capture()
         );
@@ -82,7 +82,7 @@ class NotificationServiceTest {
         verify(otpCacheService).save(transactionId, "987654");
 
         verify(rabbitTemplate).convertAndSend(
-                eq("securepay.exchange"),
+                eq("fraudshield.exchange"),
                 eq("otp.generated"),
                 any(OTPGeneratedEvent.class)
         );

@@ -1,6 +1,6 @@
-package com.securepay.auth.repository;
+﻿package com.fraudshield.auth.repository;
 
-import com.securepay.auth.entity.AuthSession;
+import com.fraudshield.auth.entity.AuthSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

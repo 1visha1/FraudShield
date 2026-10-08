@@ -1,4 +1,4 @@
-package com.securepay.fraud.config;
+﻿package com.fraudshield.fraud.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE = "securepay.exchange";
+    public static final String EXCHANGE = "fraudshield.exchange";
 
     public static final String RULE_EVALUATED_QUEUE = "fraud.rule.evaluated.q";
     public static final String RULE_EVALUATED_KEY = "rule.evaluated";

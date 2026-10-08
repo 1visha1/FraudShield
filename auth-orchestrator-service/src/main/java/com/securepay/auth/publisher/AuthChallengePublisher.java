@@ -1,5 +1,5 @@
-package com.securepay.auth.publisher;
-import com.securepay.auth.event.AuthChallengeCreatedEvent;
+﻿package com.fraudshield.auth.publisher;
+import com.fraudshield.auth.event.AuthChallengeCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -17,7 +17,7 @@ public class AuthChallengePublisher {
             AuthChallengeCreatedEvent event) {
         log.warn("event: {}",event);
         rabbitTemplate.convertAndSend(
-                "securepay.exchange",
+                "fraudshield.exchange",
                 "auth.challenge.created",
                 event);
     }

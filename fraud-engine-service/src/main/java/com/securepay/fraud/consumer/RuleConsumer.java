@@ -1,9 +1,9 @@
-package com.securepay.fraud.consumer;
+﻿package com.fraudshield.fraud.consumer;
 
-import com.securepay.fraud.cache.FraudContextCache;
-import com.securepay.fraud.config.RabbitMQConfig;
-import com.securepay.fraud.event.RuleEvaluatedEvent;
-import com.securepay.fraud.service.FraudProcessor;
+import com.fraudshield.fraud.cache.FraudContextCache;
+import com.fraudshield.fraud.config.RabbitMQConfig;
+import com.fraudshield.fraud.event.RuleEvaluatedEvent;
+import com.fraudshield.fraud.service.FraudProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

@@ -1,4 +1,4 @@
-package com.securepay.common.util;
+﻿package com.fraudshield.common.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.securepay.fraud.service;
+﻿package com.fraudshield.fraud.service;
 import org.springframework.stereotype.Service;
 @Service
 public class FraudScoringService {

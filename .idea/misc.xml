@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/device-auth-service/pom.xml" />
-        <option value="$PROJECT_DIR$/out/production/SecurePay360/pom.xml" />
+        <option value="$PROJECT_DIR$/out/production/FraudShield/pom.xml" />
         <option value="$PROJECT_DIR$/risk-engine-service/pom.xml" />
         <option value="$PROJECT_DIR$/rule-engine-service/pom.xml" />
         <option value="$PROJECT_DIR$/transaction-service/pom.xml" />

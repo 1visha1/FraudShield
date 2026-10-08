@@ -6,7 +6,7 @@
 
 ## Overview
 
-The **Authorization Server** is the identity backbone of SecurePay360. Built on **Spring Authorization Server**, it manages user accounts, handles authentication, issues RS256-signed JWTs, and exposes JWKS (JSON Web Key Set) endpoints so downstream services (especially the API Gateway) can verify tokens without calling back to this service on every request.
+The **Authorization Server** is the identity backbone of FraudShield. Built on **Spring Authorization Server**, it manages user accounts, handles authentication, issues RS256-signed JWTs, and exposes JWKS (JSON Web Key Set) endpoints so downstream services (especially the API Gateway) can verify tokens without calling back to this service on every request.
 
 ---
 
@@ -48,7 +48,7 @@ authorization-server/
 ├── Dockerfile
 ├── pom.xml
 └── src/main/
-    ├── java/com/securepay/auth/
+    ├── java/com/fraudshield/auth/
     │   ├── AuthorizationServerApplication.java
     │   ├── config/
     │   │   ├── AuthorizationServerConfig.java  # Spring Auth Server configuration
@@ -124,7 +124,7 @@ GET /oauth2/jwks
 {
   "keys": [{
     "kty": "RSA",
-    "kid": "securepay-key",
+    "kid": "fraudshield-key",
     "use": "sig",
     "alg": "RS256",
     "n": "...",
@@ -167,14 +167,14 @@ Schema is managed by Liquibase from `db/changelog/db.changelog-master.yml`.
 {
   "header": {
     "alg": "RS256",
-    "kid": "securepay-key"
+    "kid": "fraudshield-key"
   },
   "payload": {
     "sub": "john.doe",
     "iat": 1719748800,
     "exp": 1719752400,
     "iss": "http://authorization-server:9000",
-    "aud": "securepay-client",
+    "aud": "fraudshield-client",
     "scope": "read write"
   }
 }
@@ -213,7 +213,7 @@ spring:
   application:
     name: authorization-server
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
   jpa:

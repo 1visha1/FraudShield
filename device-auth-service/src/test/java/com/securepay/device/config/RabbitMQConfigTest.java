@@ -1,4 +1,4 @@
-package com.securepay.device.config;
+﻿package com.fraudshield.device.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
-package com.securepay.transaction.repository;
+﻿package com.fraudshield.transaction.repository;
 
-import com.securepay.transaction.entity.Transaction;
+import com.fraudshield.transaction.entity.Transaction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

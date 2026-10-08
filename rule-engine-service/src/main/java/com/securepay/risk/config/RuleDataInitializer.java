@@ -1,7 +1,7 @@
-package com.securepay.risk.config;
+﻿package com.fraudshield.risk.config;
 
-import com.securepay.risk.entity.FraudRule;
-import com.securepay.risk.repository.FraudRuleRepository;
+import com.fraudshield.risk.entity.FraudRule;
+import com.fraudshield.risk.repository.FraudRuleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.securepay.device.util;
+﻿package com.fraudshield.device.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

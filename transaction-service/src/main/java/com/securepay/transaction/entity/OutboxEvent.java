@@ -1,4 +1,4 @@
-package com.securepay.transaction.entity;
+﻿package com.fraudshield.transaction.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package com.securepay.auth.service;
+﻿package com.fraudshield.auth.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.securepay.auth.dto.AuthType;
+import com.fraudshield.auth.dto.AuthType;
 
 @Service
 @Slf4j

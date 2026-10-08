@@ -1,4 +1,4 @@
-package com.securepay.device.exception;
+﻿package com.fraudshield.device.exception;
 
 public class DeviceVerificationFailedException extends RuntimeException {
 

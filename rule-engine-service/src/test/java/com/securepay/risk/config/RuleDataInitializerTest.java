@@ -1,7 +1,7 @@
-package com.securepay.risk.config;
+﻿package com.fraudshield.risk.config;
 
-import com.securepay.risk.entity.FraudRule;
-import com.securepay.risk.repository.FraudRuleRepository;
+import com.fraudshield.risk.entity.FraudRule;
+import com.fraudshield.risk.repository.FraudRuleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

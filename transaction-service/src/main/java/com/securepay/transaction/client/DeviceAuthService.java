@@ -1,8 +1,8 @@
-package com.securepay.transaction.client;
+﻿package com.fraudshield.transaction.client;
 
-import com.securepay.transaction.client.dto.DeviceVerificationRequest;
-import com.securepay.transaction.client.dto.DeviceVerificationResponse;
-import com.securepay.transaction.util.ApiResponse;
+import com.fraudshield.transaction.client.dto.DeviceVerificationRequest;
+import com.fraudshield.transaction.client.dto.DeviceVerificationResponse;
+import com.fraudshield.transaction.util.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreakerFactory;
 import org.springframework.core.ParameterizedTypeReference;

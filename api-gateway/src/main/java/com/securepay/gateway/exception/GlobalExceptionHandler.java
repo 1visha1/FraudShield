@@ -1,7 +1,7 @@
-package com.securepay.gateway.exception;
+﻿package com.fraudshield.gateway.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.gateway.util.ApiResponse;
+import com.fraudshield.gateway.util.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.core.annotation.Order;

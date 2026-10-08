@@ -1,4 +1,4 @@
-package com.securepay.device.config;
+﻿package com.fraudshield.device.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE = "securepay.exchange";
+    public static final String EXCHANGE = "fraudshield.exchange";
     public static final String ROUTING_KEY = "device.verified";
     public static final String QUEUE = "device.verified.q";
     public static final String DLQ = "device.verified.dlq";

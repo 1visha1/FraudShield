@@ -1,8 +1,8 @@
-package com.securepay.risk.service;
+﻿package com.fraudshield.risk.service;
 
-import com.securepay.risk.config.RabbitMQConfig;
-import com.securepay.risk.event.RiskAssessedEvent;
-import com.securepay.risk.event.TransactionCreatedEvent;
+import com.fraudshield.risk.config.RabbitMQConfig;
+import com.fraudshield.risk.event.RiskAssessedEvent;
+import com.fraudshield.risk.event.TransactionCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

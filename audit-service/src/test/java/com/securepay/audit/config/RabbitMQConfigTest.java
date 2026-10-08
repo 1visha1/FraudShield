@@ -1,4 +1,4 @@
-package com.securepay.audit.config;
+﻿package com.fraudshield.audit.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

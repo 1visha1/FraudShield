@@ -1,6 +1,6 @@
-package com.securepay.transaction.repository;
+﻿package com.fraudshield.transaction.repository;
 
-import com.securepay.transaction.entity.OutboxEvent;
+import com.fraudshield.transaction.entity.OutboxEvent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

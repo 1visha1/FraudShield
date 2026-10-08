@@ -1,8 +1,8 @@
-package com.securepay.transaction.consumer;
+﻿package com.fraudshield.transaction.consumer;
 
-import com.securepay.transaction.event.AuthChallengeCompletedEvent;
-import com.securepay.transaction.event.TransactionBlockedEvent;
-import com.securepay.transaction.service.TransactionService;
+import com.fraudshield.transaction.event.AuthChallengeCompletedEvent;
+import com.fraudshield.transaction.event.TransactionBlockedEvent;
+import com.fraudshield.transaction.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

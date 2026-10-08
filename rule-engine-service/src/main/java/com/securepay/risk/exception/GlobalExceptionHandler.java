@@ -1,6 +1,6 @@
-package com.securepay.risk.exception;
+﻿package com.fraudshield.risk.exception;
 
-import com.securepay.risk.util.ApiResponse;
+import com.fraudshield.risk.util.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,4 +1,4 @@
-package com.securepay.notification.dto;
+﻿package com.fraudshield.notification.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,8 @@
-package com.securepay.fraud.consumer;
+﻿package com.fraudshield.fraud.consumer;
 
-import com.securepay.fraud.cache.FraudContextCache;
-import com.securepay.fraud.event.RuleEvaluatedEvent;
-import com.securepay.fraud.service.FraudProcessor;
+import com.fraudshield.fraud.cache.FraudContextCache;
+import com.fraudshield.fraud.event.RuleEvaluatedEvent;
+import com.fraudshield.fraud.service.FraudProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

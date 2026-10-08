@@ -1,4 +1,4 @@
-package com.securepay.auth.event;
+﻿package com.fraudshield.auth.event;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

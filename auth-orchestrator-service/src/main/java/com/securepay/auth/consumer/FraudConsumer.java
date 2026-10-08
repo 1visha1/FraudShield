@@ -1,8 +1,8 @@
-package com.securepay.auth.consumer;
+﻿package com.fraudshield.auth.consumer;
 
-import com.securepay.auth.config.RabbitMQConfig;
-import com.securepay.auth.event.FraudDetectedEvent;
-import com.securepay.auth.service.AuthOrchestratorService;
+import com.fraudshield.auth.config.RabbitMQConfig;
+import com.fraudshield.auth.event.FraudDetectedEvent;
+import com.fraudshield.auth.service.AuthOrchestratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

@@ -1,4 +1,4 @@
-package com.securepay.device.cache;
+﻿package com.fraudshield.device.cache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

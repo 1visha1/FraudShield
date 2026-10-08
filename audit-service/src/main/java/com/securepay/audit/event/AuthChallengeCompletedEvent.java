@@ -1,4 +1,4 @@
-package com.securepay.audit.event;
+﻿package com.fraudshield.audit.event;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

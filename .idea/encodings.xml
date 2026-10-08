@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
@@ -10,7 +10,7 @@
     <file url="file://$PROJECT_DIR$/discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/fraud-engine-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/notification-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/out/production/SecurePay360/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/out/production/FraudShield/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/risk-engine-service/spring/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/risk-engine-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/risk-engine-service/src/main/resources" charset="UTF-8" />

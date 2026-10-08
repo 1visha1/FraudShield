@@ -1,4 +1,4 @@
-package com.securepay.device;
+﻿package com.fraudshield.device;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

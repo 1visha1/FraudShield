@@ -1,12 +1,12 @@
-package com.securepay.transaction.service;
+﻿package com.fraudshield.transaction.service;
 
-import com.securepay.transaction.dto.CreateTransactionRequest;
-import com.securepay.transaction.entity.Transaction;
-import com.securepay.transaction.event.AuthChallengeCompletedEvent;
-import com.securepay.transaction.event.TransactionApprovedEvent;
-import com.securepay.transaction.event.TransactionBlockedEvent;
-import com.securepay.transaction.event.TransactionCreatedEvent;
-import com.securepay.transaction.repository.TransactionRepository;
+import com.fraudshield.transaction.dto.CreateTransactionRequest;
+import com.fraudshield.transaction.entity.Transaction;
+import com.fraudshield.transaction.event.AuthChallengeCompletedEvent;
+import com.fraudshield.transaction.event.TransactionApprovedEvent;
+import com.fraudshield.transaction.event.TransactionBlockedEvent;
+import com.fraudshield.transaction.event.TransactionCreatedEvent;
+import com.fraudshield.transaction.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static com.securepay.transaction.config.RabbitMQConfig.*;
+import static com.fraudshield.transaction.config.RabbitMQConfig.*;
 
 @Service
 @RequiredArgsConstructor
@@ -80,7 +80,7 @@ public class TransactionService {
     }
 
     @Transactional
-    public void blockTransaction(com.securepay.transaction.event.TransactionBlockedEvent blockEvent) {
+    public void blockTransaction(com.fraudshield.transaction.event.TransactionBlockedEvent blockEvent) {
         UUID txnId = blockEvent.getTransactionId();
         log.info("Attempting to block transaction: {}", txnId);
 

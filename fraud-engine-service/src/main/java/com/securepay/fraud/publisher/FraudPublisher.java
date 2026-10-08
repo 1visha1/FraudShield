@@ -1,5 +1,5 @@
-package com.securepay.fraud.publisher;
-import com.securepay.fraud.event.FraudDetectedEvent;
+﻿package com.fraudshield.fraud.publisher;
+import com.fraudshield.fraud.event.FraudDetectedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -15,7 +15,7 @@ public class FraudPublisher {
             FraudDetectedEvent event) {
         log.warn("event FraudDetectedEvent {}",event);
         rabbitTemplate.convertAndSend(
-                "securepay.exchange",
+                "fraudshield.exchange",
                 "fraud.detected",
                 event);
     }

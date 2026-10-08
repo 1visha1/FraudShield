@@ -1,4 +1,4 @@
-package com.securepay.risk.config;
+﻿package com.fraudshield.risk.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE = "securepay.exchange";
+    public static final String EXCHANGE = "fraudshield.exchange";
 
     public static final String TRANSACTION_CREATED_QUEUE = "risk.transaction.created.q";
     public static final String TRANSACTION_CREATED_KEY = "transaction.created";

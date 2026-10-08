@@ -1,10 +1,10 @@
-package com.securepay.auth.controller;
+﻿package com.fraudshield.auth.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.auth.dto.LoginRequest;
-import com.securepay.auth.dto.RegistrationRequest;
-import com.securepay.auth.entity.User;
-import com.securepay.auth.repository.UserRepository;
+import com.fraudshield.auth.dto.LoginRequest;
+import com.fraudshield.auth.dto.RegistrationRequest;
+import com.fraudshield.auth.entity.User;
+import com.fraudshield.auth.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

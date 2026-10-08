@@ -1,8 +1,8 @@
-# SecurePay360
+# FraudShield
 
-**SecurePay360** is a production-grade, event-driven payment security platform built as a Spring Boot microservices monorepo. It implements a full transaction lifecycle — from OAuth2-based authentication and device fingerprint validation through real-time risk scoring, rule evaluation, fraud detection, step-up OTP authentication, and immutable audit logging — all wired together over RabbitMQ with a centralized API Gateway entry point.
+**FraudShield** is a production-grade, event-driven payment security platform built as a Spring Boot microservices monorepo. It implements a full transaction lifecycle — from OAuth2-based authentication and device fingerprint validation through real-time risk scoring, rule evaluation, fraud detection, step-up OTP authentication, and immutable audit logging — all wired together over RabbitMQ with a centralized API Gateway entry point.
 
-![SecurePay360 Architecture](./SecurePay.png)
+![FraudShield Architecture](./FraudShield.png)
 
 ---
 
@@ -180,7 +180,7 @@
 ## Project Structure
 
 ```
-SecurePay360/
+FraudShield/
 ├── pom.xml                         # Root aggregator POM (11 modules)
 ├── docker-compose.yml              # Full stack: infra + all services
 ├── prometheus.yml                  # Prometheus scrape targets
@@ -211,7 +211,7 @@ SecurePay360/
 ├── notification-service/           # OTP delivery (SMS/email)
 ├── audit-service/                  # Elasticsearch audit log
 └── shared/
-    └── securepay-common/           # Shared DTOs / utilities
+    └── fraudshield-common/           # Shared DTOs / utilities
 ```
 
 ---
@@ -222,7 +222,7 @@ The following variables are referenced across service configurations. For local 
 
 | Variable | Default | Used By |
 |---|---|---|
-| `DATABASE_URL` | `jdbc:postgresql://localhost:5432/securepay` | authorization-server |
+| `DATABASE_URL` | `jdbc:postgresql://localhost:5432/fraudshield` | authorization-server |
 | `DATABASE_USERNAME` | `postgres` | authorization-server |
 | `DATABASE_PASSWORD` | `postgres` | authorization-server |
 | `EUREKA_URL` | `http://localhost:8761/eureka/` | all services |
@@ -254,7 +254,7 @@ Wait for all health checks to pass before starting application services.
 The Config Server reads YAML files from the local filesystem path defined in `config-server/src/main/resources/application.yml`. By default it points to:
 
 ```
-D:/Workspace/Spring Projects/SecurePay360/config-repo
+D:/Workspace/Spring Projects/FraudShield/config-repo
 ```
 
 **Update this path** to match your local checkout before running the Config Server:
@@ -312,7 +312,7 @@ Build and start every service and all infrastructure in one command:
 docker compose up --build -d
 ```
 
-Docker Compose builds each service from its local `Dockerfile` using a two-stage Maven + JRE image. Services are wired together via the `securepay-network` bridge network.
+Docker Compose builds each service from its local `Dockerfile` using a two-stage Maven + JRE image. Services are wired together via the `fraudshield-network` bridge network.
 
 **Check all running containers:**
 
@@ -508,12 +508,12 @@ All services expose metrics at `/actuator/prometheus`.
 
 ### PostgreSQL
 
-A single `securepay` database is shared by all services that require persistence.
+A single `fraudshield` database is shared by all services that require persistence.
 
 **Docker Compose provisions it automatically:**
 
 ```yaml
-POSTGRES_DB: securepay
+POSTGRES_DB: fraudshield
 POSTGRES_USER: postgres
 POSTGRES_PASSWORD: postgres
 ```
@@ -521,7 +521,7 @@ POSTGRES_PASSWORD: postgres
 For local development, create the database manually:
 
 ```sql
-CREATE DATABASE securepay;
+CREATE DATABASE fraudshield;
 ```
 
 ### Schema Management
@@ -550,7 +550,7 @@ Security is disabled (`xpack.security.enabled: false`) in the Docker Compose con
 
 ## RabbitMQ Message Bus
 
-All services communicate asynchronously through a **Topic Exchange** named `securepay.exchange`.
+All services communicate asynchronously through a **Topic Exchange** named `fraudshield.exchange`.
 
 | Routing Key | Queue | Publisher → Consumer |
 |---|---|---|
@@ -615,7 +615,7 @@ If any default port is already in use, override it by editing the relevant port 
 2. Keep each microservice self-contained — avoid cross-module compile-time dependencies (use messaging events instead).
 3. Add or update unit tests for any changed business logic. Run tests with `./mvnw test` from the affected service directory.
 4. Ensure all service health endpoints (`/actuator/health`) return `UP` before submitting a pull request.
-5. Follow the existing package structure: `com.securepay.<service-name>.<layer>`.
+5. Follow the existing package structure: `com.fraudshield.<service-name>.<layer>`.
 6. Read the [Code of Conduct](./CODE_OF_CONDUCT.md) and [Security Policy](./SECURITY.md) before contributing.
 
 ---

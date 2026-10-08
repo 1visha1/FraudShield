@@ -1,11 +1,11 @@
-package com.securepay.device.service;
+﻿package com.fraudshield.device.service;
 
-import com.securepay.device.cache.DeviceCacheService;
-import com.securepay.device.dto.DeviceVerificationRequest;
-import com.securepay.device.dto.DeviceVerificationResponse;
-import com.securepay.device.entity.TrustedDevice;
-import com.securepay.device.event.DeviceVerifiedEvent;
-import com.securepay.device.repository.TrustedDeviceRepository;
+import com.fraudshield.device.cache.DeviceCacheService;
+import com.fraudshield.device.dto.DeviceVerificationRequest;
+import com.fraudshield.device.dto.DeviceVerificationResponse;
+import com.fraudshield.device.entity.TrustedDevice;
+import com.fraudshield.device.event.DeviceVerifiedEvent;
+import com.fraudshield.device.repository.TrustedDeviceRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,8 +19,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.securepay.device.config.RabbitMQConfig.EXCHANGE;
-import static com.securepay.device.config.RabbitMQConfig.ROUTING_KEY;
+import static com.fraudshield.device.config.RabbitMQConfig.EXCHANGE;
+import static com.fraudshield.device.config.RabbitMQConfig.ROUTING_KEY;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;

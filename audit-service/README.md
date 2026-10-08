@@ -45,7 +45,7 @@ The **Audit Service** is a cross-cutting concern that captures every event publi
 audit-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/audit/
+└── src/main/java/com/fraudshield/audit/
     ├── AuditServiceApplication.java
     ├── config/
     │   ├── RabbitMQConfig.java         # Wildcard audit.q binding
@@ -68,9 +68,9 @@ audit-service/
 
 | Queue | Routing Key | Description |
 |---|---|---|
-| `audit.q` | `#` (wildcard) | ALL events from securepay.exchange |
+| `audit.q` | `#` (wildcard) | ALL events from fraudshield.exchange |
 
-The `#` binding captures every single message published to `securepay.exchange`, regardless of routing key.
+The `#` binding captures every single message published to `fraudshield.exchange`, regardless of routing key.
 
 ### No Published Events
 

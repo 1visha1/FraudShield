@@ -1,6 +1,6 @@
-package com.securepay.risk.repository;
+﻿package com.fraudshield.risk.repository;
 
-import com.securepay.risk.model.Rule;
+import com.fraudshield.risk.model.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

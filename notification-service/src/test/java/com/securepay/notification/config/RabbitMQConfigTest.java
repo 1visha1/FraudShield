@@ -1,4 +1,4 @@
-package com.securepay.notification.config;
+﻿package com.fraudshield.notification.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

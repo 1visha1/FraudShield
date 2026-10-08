@@ -1,4 +1,4 @@
-spring:
+﻿spring:
   datasource:
     url: jdbc:h2:mem:device_test_db
     driver-class-name: org.h2.Driver
@@ -29,4 +29,4 @@ spring:
 logging:
   level:
     root: WARN
-    com.securepay: DEBUG
+    com.fraudshield: DEBUG

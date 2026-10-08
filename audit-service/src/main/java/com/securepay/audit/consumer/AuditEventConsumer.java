@@ -1,9 +1,9 @@
-package com.securepay.audit.consumer;
+﻿package com.fraudshield.audit.consumer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.audit.service.AuditStreamService;
-import com.securepay.audit.model.AuditEvent;
+import com.fraudshield.audit.service.AuditStreamService;
+import com.fraudshield.audit.model.AuditEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;

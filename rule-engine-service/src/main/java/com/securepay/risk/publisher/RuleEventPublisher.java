@@ -1,5 +1,5 @@
-package com.securepay.risk.publisher;
-import com.securepay.risk.event.RuleEvaluatedEvent;
+﻿package com.fraudshield.risk.publisher;
+import com.fraudshield.risk.event.RuleEvaluatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class RuleEventPublisher {
             RuleEvaluatedEvent event) {
 
         rabbitTemplate.convertAndSend(
-                "securepay.exchange",
+                "fraudshield.exchange",
                 "rule.evaluated",
                 event);
     }

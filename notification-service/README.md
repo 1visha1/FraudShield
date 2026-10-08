@@ -47,7 +47,7 @@ The **Notification Service** handles the delivery of one-time passwords (OTPs) d
 notification-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/notification/
+└── src/main/java/com/fraudshield/notification/
     ├── NotificationServiceApplication.java
     ├── config/
     │   └── RabbitMQConfig.java         # Queue declarations with DLQ pattern
@@ -165,7 +165,7 @@ AuthChallengeConsumer.consume(event)
 3. LOG: "[SIMULATED SMS] OTP=482931 for transaction=txnId customer=customerId"
    (Production: call Twilio or AWS SNS here)
           |
-4. PUBLISH otp.generated -> securepay.exchange
+4. PUBLISH otp.generated -> fraudshield.exchange
 ```
 
 ---
@@ -212,7 +212,7 @@ spring:
     host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
 ```
 
 ---

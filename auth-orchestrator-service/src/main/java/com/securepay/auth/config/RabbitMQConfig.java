@@ -1,8 +1,8 @@
-package com.securepay.auth.config;
+﻿package com.fraudshield.auth.config;
 
-import com.securepay.auth.event.FraudDetectedEvent;
-import com.securepay.auth.event.OtpVerifiedEvent;
-import com.securepay.auth.event.AuthChallengeCompletedEvent;
+import com.fraudshield.auth.event.FraudDetectedEvent;
+import com.fraudshield.auth.event.OtpVerifiedEvent;
+import com.fraudshield.auth.event.AuthChallengeCompletedEvent;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE    = "securepay.exchange";
+    public static final String EXCHANGE    = "fraudshield.exchange";
     public static final String FRAUD_QUEUE = "auth.fraud.detected.q";
     public static final String FRAUD_KEY   = "fraud.detected";
     
@@ -75,9 +75,9 @@ public class RabbitMQConfig {
     public DefaultClassMapper classMapper() {
         DefaultClassMapper classMapper = new DefaultClassMapper();
         Map<String, Class<?>> idClassMapping = new HashMap<>();
-        idClassMapping.put("com.securepay.fraud.event.FraudDetectedEvent", FraudDetectedEvent.class);
-        idClassMapping.put("com.securepay.notification.event.OtpVerifiedEvent", OtpVerifiedEvent.class);
-        idClassMapping.put("com.securepay.notification.event.AuthChallengeCompletedEvent", AuthChallengeCompletedEvent.class);
+        idClassMapping.put("com.fraudshield.fraud.event.FraudDetectedEvent", FraudDetectedEvent.class);
+        idClassMapping.put("com.fraudshield.notification.event.OtpVerifiedEvent", OtpVerifiedEvent.class);
+        idClassMapping.put("com.fraudshield.notification.event.AuthChallengeCompletedEvent", AuthChallengeCompletedEvent.class);
         
         classMapper.setIdClassMapping(idClassMapping);
         classMapper.setTrustedPackages("*");

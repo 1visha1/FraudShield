@@ -48,7 +48,7 @@ Rules are managed dynamically via a CRUD REST API - no code deployment needed to
 rule-engine-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/risk/
+└── src/main/java/com/fraudshield/risk/
     ├── RuleEngineServiceApplication.java
     ├── config/
     │   └── RabbitMQConfig.java       # Queues and exchange declarations
@@ -217,7 +217,7 @@ spring:
   application:
     name: rule-engine-service
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
   rabbitmq:

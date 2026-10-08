@@ -1,12 +1,12 @@
-package com.securepay.transaction.service;
+﻿package com.fraudshield.transaction.service;
 
-import com.securepay.transaction.dto.CreateTransactionRequest;
-import com.securepay.transaction.entity.Transaction;
-import com.securepay.transaction.event.AuthChallengeCompletedEvent;
-import com.securepay.transaction.event.TransactionApprovedEvent;
-import com.securepay.transaction.event.TransactionBlockedEvent;
-import com.securepay.transaction.event.TransactionCreatedEvent;
-import com.securepay.transaction.repository.TransactionRepository;
+import com.fraudshield.transaction.dto.CreateTransactionRequest;
+import com.fraudshield.transaction.entity.Transaction;
+import com.fraudshield.transaction.event.AuthChallengeCompletedEvent;
+import com.fraudshield.transaction.event.TransactionApprovedEvent;
+import com.fraudshield.transaction.event.TransactionBlockedEvent;
+import com.fraudshield.transaction.event.TransactionCreatedEvent;
+import com.fraudshield.transaction.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -19,8 +19,8 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.securepay.transaction.config.RabbitMQConfig.EXCHANGE;
-import static com.securepay.transaction.config.RabbitMQConfig.ROUTING_KEY;
+import static com.fraudshield.transaction.config.RabbitMQConfig.EXCHANGE;
+import static com.fraudshield.transaction.config.RabbitMQConfig.ROUTING_KEY;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;

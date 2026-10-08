@@ -1,4 +1,4 @@
-package com.securepay.risk.exception;
+﻿package com.fraudshield.risk.exception;
 
 public class RuleNotFoundException extends RuntimeException {
 

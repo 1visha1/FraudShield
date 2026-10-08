@@ -1,7 +1,7 @@
-package com.securepay.transaction.service;
+﻿package com.fraudshield.transaction.service;
 
-import com.securepay.transaction.entity.OutboxEvent;
-import com.securepay.transaction.repository.OutboxEventRepository;
+import com.fraudshield.transaction.entity.OutboxEvent;
+import com.fraudshield.transaction.repository.OutboxEventRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,8 +14,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static com.securepay.transaction.config.RabbitMQConfig.EXCHANGE;
-import static com.securepay.transaction.config.RabbitMQConfig.ROUTING_KEY;
+import static com.fraudshield.transaction.config.RabbitMQConfig.EXCHANGE;
+import static com.fraudshield.transaction.config.RabbitMQConfig.ROUTING_KEY;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;

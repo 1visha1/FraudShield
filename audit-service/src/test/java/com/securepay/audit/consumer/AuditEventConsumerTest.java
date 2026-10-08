@@ -1,8 +1,8 @@
-package com.securepay.audit.consumer;
+﻿package com.fraudshield.audit.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.audit.model.AuditEvent;
-import com.securepay.audit.service.AuditStreamService;
+import com.fraudshield.audit.model.AuditEvent;
+import com.fraudshield.audit.service.AuditStreamService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

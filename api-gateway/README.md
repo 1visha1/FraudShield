@@ -6,7 +6,7 @@
 
 ## Overview
 
-The **API Gateway** is built on **Spring Cloud Gateway** and serves as the only publicly exposed service (port 8080) in the SecurePay360 platform. It validates JWT tokens against the Authorization Server's public key, routes requests to downstream services via Eureka service discovery, and applies cross-cutting filters.
+The **API Gateway** is built on **Spring Cloud Gateway** and serves as the only publicly exposed service (port 8080) in the FraudShield platform. It validates JWT tokens against the Authorization Server's public key, routes requests to downstream services via Eureka service discovery, and applies cross-cutting filters.
 
 ---
 
@@ -45,7 +45,7 @@ api-gateway/
 ├── Dockerfile
 ├── pom.xml
 └── src/main/
-    ├── java/com/securepay/gateway/
+    ├── java/com/fraudshield/gateway/
     │   └── ApiGatewayApplication.java
     └── resources/
         └── application.yml          # All routes and security configuration

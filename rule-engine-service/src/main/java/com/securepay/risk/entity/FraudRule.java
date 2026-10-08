@@ -1,4 +1,4 @@
-package com.securepay.risk.entity;
+﻿package com.fraudshield.risk.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

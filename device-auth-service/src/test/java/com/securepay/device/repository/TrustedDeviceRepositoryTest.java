@@ -1,6 +1,6 @@
-package com.securepay.device.repository;
+﻿package com.fraudshield.device.repository;
 
-import com.securepay.device.entity.TrustedDevice;
+import com.fraudshield.device.entity.TrustedDevice;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

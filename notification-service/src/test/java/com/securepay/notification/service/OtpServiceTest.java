@@ -1,10 +1,10 @@
-package com.securepay.notification.service;
+﻿package com.fraudshield.notification.service;
 
-import com.securepay.notification.dto.OtpVerificationRequest;
-import com.securepay.notification.dto.OtpVerificationResponse;
-import com.securepay.notification.event.OtpVerifiedEvent;
-import com.securepay.notification.exception.OtpExpiredException;
-import com.securepay.notification.exception.OtpInvalidException;
+import com.fraudshield.notification.dto.OtpVerificationRequest;
+import com.fraudshield.notification.dto.OtpVerificationResponse;
+import com.fraudshield.notification.event.OtpVerifiedEvent;
+import com.fraudshield.notification.exception.OtpExpiredException;
+import com.fraudshield.notification.exception.OtpInvalidException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -54,7 +54,7 @@ class OtpServiceTest {
                 ArgumentCaptor.forClass(OtpVerifiedEvent.class);
 
         verify(rabbitTemplate).convertAndSend(
-                eq("securepay.exchange"),
+                eq("fraudshield.exchange"),
                 eq("otp.verified"),
                 captor.capture()
         );

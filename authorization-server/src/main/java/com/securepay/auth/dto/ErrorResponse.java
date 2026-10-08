@@ -1,4 +1,4 @@
-package com.securepay.auth.dto;
+﻿package com.fraudshield.auth.dto;
 
 import lombok.Builder;
 import lombok.Data;

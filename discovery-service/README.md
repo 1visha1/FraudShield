@@ -6,7 +6,7 @@
 
 ## Overview
 
-The **Discovery Service** runs Netflix Eureka Server and acts as the central service registry for all microservices in the SecurePay360 platform. All services register themselves on startup and query Eureka to find each other by logical service name.
+The **Discovery Service** runs Netflix Eureka Server and acts as the central service registry for all microservices in the FraudShield platform. All services register themselves on startup and query Eureka to find each other by logical service name.
 
 ---
 

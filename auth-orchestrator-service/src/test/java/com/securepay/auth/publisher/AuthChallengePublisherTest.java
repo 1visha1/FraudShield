@@ -1,6 +1,6 @@
-package com.securepay.auth.publisher;
+﻿package com.fraudshield.auth.publisher;
 
-import com.securepay.auth.event.AuthChallengeCreatedEvent;
+import com.fraudshield.auth.event.AuthChallengeCreatedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,7 +47,7 @@ class AuthChallengePublisherTest {
 
         verify(rabbitTemplate, times(1))
                 .convertAndSend(
-                        eq("securepay.exchange"),
+                        eq("fraudshield.exchange"),
                         eq("auth.challenge.created"),
                         captor.capture());
 
@@ -67,7 +67,7 @@ class AuthChallengePublisherTest {
         publisher.publish(event);
 
         verify(rabbitTemplate).convertAndSend(
-                "securepay.exchange",
+                "fraudshield.exchange",
                 "auth.challenge.created",
                 event
         );

@@ -1,6 +1,6 @@
-package com.securepay.audit.repository;
+﻿package com.fraudshield.audit.repository;
 
-import com.securepay.audit.model.AuditEvent;
+import com.fraudshield.audit.model.AuditEvent;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 

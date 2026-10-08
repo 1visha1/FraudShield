@@ -1,9 +1,9 @@
-package com.securepay.device.controller;
+﻿package com.fraudshield.device.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.device.dto.DeviceVerificationRequest;
-import com.securepay.device.dto.DeviceVerificationResponse;
-import com.securepay.device.service.DeviceService;
+import com.fraudshield.device.dto.DeviceVerificationRequest;
+import com.fraudshield.device.dto.DeviceVerificationResponse;
+import com.fraudshield.device.service.DeviceService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

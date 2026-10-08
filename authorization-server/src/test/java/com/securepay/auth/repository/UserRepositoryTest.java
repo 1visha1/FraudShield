@@ -1,6 +1,6 @@
-package com.securepay.auth.repository;
+﻿package com.fraudshield.auth.repository;
 
-import com.securepay.auth.entity.User;
+import com.fraudshield.auth.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

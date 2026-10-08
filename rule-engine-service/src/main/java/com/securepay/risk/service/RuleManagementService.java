@@ -1,10 +1,10 @@
-package com.securepay.risk.service;
+﻿package com.fraudshield.risk.service;
 
 
-import com.securepay.risk.dto.CreateRuleRequest;
-import com.securepay.risk.dto.UpdateRuleRequest;
-import com.securepay.risk.entity.FraudRule;
-import com.securepay.risk.repository.FraudRuleRepository;
+import com.fraudshield.risk.dto.CreateRuleRequest;
+import com.fraudshield.risk.dto.UpdateRuleRequest;
+import com.fraudshield.risk.entity.FraudRule;
+import com.fraudshield.risk.repository.FraudRuleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.securepay.risk.consumer;
-import com.securepay.risk.event.DeviceVerifiedEvent;
-import com.securepay.risk.service.DeviceRiskCache;
+﻿package com.fraudshield.risk.consumer;
+import com.fraudshield.risk.event.DeviceVerifiedEvent;
+import com.fraudshield.risk.service.DeviceRiskCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;

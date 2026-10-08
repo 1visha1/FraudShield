@@ -1,6 +1,6 @@
-package com.securepay.notification.publisher;
+﻿package com.fraudshield.notification.publisher;
 
-import com.securepay.notification.event.AuthChallengeSentEvent;
+import com.fraudshield.notification.event.AuthChallengeSentEvent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ class NotificationPublisherTest {
 
         verify(rabbitTemplate, times(1))
                 .convertAndSend(
-                        "securepay.exchange",
+                        "fraudshield.exchange",
                         "auth.challenge.sent",
                         event
                 );

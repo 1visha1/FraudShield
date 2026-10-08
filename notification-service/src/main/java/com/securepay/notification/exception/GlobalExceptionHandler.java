@@ -1,6 +1,6 @@
-package com.securepay.notification.exception;
+﻿package com.fraudshield.notification.exception;
 
-import com.securepay.notification.util.ApiResponse;
+import com.fraudshield.notification.util.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

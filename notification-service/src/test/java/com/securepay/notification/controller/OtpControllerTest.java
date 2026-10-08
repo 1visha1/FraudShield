@@ -1,9 +1,9 @@
-package com.securepay.notification.controller;
+﻿package com.fraudshield.notification.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.notification.dto.OtpVerificationRequest;
-import com.securepay.notification.event.AuthChallengeCompletedEvent;
-import com.securepay.notification.service.OtpCacheService;
+import com.fraudshield.notification.dto.OtpVerificationRequest;
+import com.fraudshield.notification.event.AuthChallengeCompletedEvent;
+import com.fraudshield.notification.service.OtpCacheService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -65,7 +65,7 @@ class OtpControllerTest {
                 ArgumentCaptor.forClass(AuthChallengeCompletedEvent.class);
 
         verify(rabbitTemplate).convertAndSend(
-                eq("securepay.exchange"),
+                eq("fraudshield.exchange"),
                 eq("auth.challenge.completed.notification"),
                 captor.capture()
         );
@@ -101,7 +101,7 @@ class OtpControllerTest {
                 ArgumentCaptor.forClass(AuthChallengeCompletedEvent.class);
 
         verify(rabbitTemplate).convertAndSend(
-                eq("securepay.exchange"),
+                eq("fraudshield.exchange"),
                 eq("auth.challenge.completed.notification"),
                 captor.capture()
         );
@@ -134,7 +134,7 @@ class OtpControllerTest {
                 ArgumentCaptor.forClass(AuthChallengeCompletedEvent.class);
 
         verify(rabbitTemplate).convertAndSend(
-                eq("securepay.exchange"),
+                eq("fraudshield.exchange"),
                 eq("auth.challenge.completed.notification"),
                 captor.capture()
         );

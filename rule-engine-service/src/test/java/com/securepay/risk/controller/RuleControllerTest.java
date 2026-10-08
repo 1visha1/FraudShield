@@ -1,10 +1,10 @@
-package com.securepay.risk.controller;
+﻿package com.fraudshield.risk.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.risk.dto.CreateRuleRequest;
-import com.securepay.risk.dto.UpdateRuleRequest;
-import com.securepay.risk.entity.FraudRule;
-import com.securepay.risk.service.RuleManagementService;
+import com.fraudshield.risk.dto.CreateRuleRequest;
+import com.fraudshield.risk.dto.UpdateRuleRequest;
+import com.fraudshield.risk.entity.FraudRule;
+import com.fraudshield.risk.service.RuleManagementService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

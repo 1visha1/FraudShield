@@ -46,7 +46,7 @@ The **Fraud Engine Service** is the third and final async scoring stage. It cons
 fraud-engine-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/fraud/
+└── src/main/java/com/fraudshield/fraud/
     ├── FraudEngineServiceApplication.java
     ├── config/
     │   └── RabbitMQConfig.java       # Queues and exchange declarations
@@ -161,7 +161,7 @@ FraudProcessor.process(transactionId)
           |
 4. INSERT INTO fraud_decisions {transactionId, fraudScore=75, decision=HIGH_RISK}
           |
-5. PUBLISH fraud.detected -> securepay.exchange
+5. PUBLISH fraud.detected -> fraudshield.exchange
    payload: {transactionId, customerId, fraudScore=75, decision=HIGH_RISK}
           |
 6. cache.evict(transactionId)
@@ -183,7 +183,7 @@ spring:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
   rabbitmq:
     host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}

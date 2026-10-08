@@ -47,7 +47,7 @@ The **Auth Orchestrator Service** is the central coordinator in the post-fraud-d
 auth-orchestrator-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/auth/
+└── src/main/java/com/fraudshield/auth/
     ├── AuthOrchestratorServiceApplication.java
     ├── config/
     │   └── RabbitMQConfig.java       # All queue and exchange declarations
@@ -211,7 +211,7 @@ spring:
   application:
     name: auth-orchestrator-service
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
   rabbitmq:

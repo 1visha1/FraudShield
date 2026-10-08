@@ -1,4 +1,4 @@
-package com.securepay.notification.util;
+﻿package com.fraudshield.notification.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

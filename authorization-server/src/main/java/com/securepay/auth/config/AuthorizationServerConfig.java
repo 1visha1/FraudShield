@@ -1,11 +1,11 @@
-package com.securepay.auth.config;
+﻿package com.fraudshield.auth.config;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.securepay.auth.entity.User;
+import com.fraudshield.auth.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -73,7 +73,7 @@ import java.util.stream.Collectors;
 public class AuthorizationServerConfig {
 
     private static final String JWK_TABLE_NAME = "oauth2_jwk";
-    private static final String JWK_ID = "securepay-jwk-id"; // Fixed ID for the single JWK
+    private static final String JWK_ID = "fraudshield-jwk-id"; // Fixed ID for the single JWK
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -126,16 +126,16 @@ public class AuthorizationServerConfig {
         JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
 
         // Check if client already exists to prevent duplicates on restart
-        RegisteredClient existingClient = registeredClientRepository.findByClientId("securepay-client");
+        RegisteredClient existingClient = registeredClientRepository.findByClientId("fraudshield-client");
         if (existingClient == null) {
             RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId("securepay-client")
+                    .clientId("fraudshield-client")
                     .clientSecret(passwordEncoder().encode("secret"))
                     .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                     .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                     .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/securepay-client")
+                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/fraudshield-client")
                     .scope(OidcScopes.OPENID)
                     .scope("read")
                     .scope("write")

@@ -1,4 +1,4 @@
-package com.securepay.auth.config;
+﻿package com.fraudshield.auth.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

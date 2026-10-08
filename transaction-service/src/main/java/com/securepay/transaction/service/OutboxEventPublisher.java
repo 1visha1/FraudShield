@@ -1,7 +1,7 @@
-package com.securepay.transaction.service;
+﻿package com.fraudshield.transaction.service;
 
-import com.securepay.transaction.entity.OutboxEvent;
-import com.securepay.transaction.repository.OutboxEventRepository;
+import com.fraudshield.transaction.entity.OutboxEvent;
+import com.fraudshield.transaction.repository.OutboxEventRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.securepay.transaction.config.RabbitMQConfig.EXCHANGE;
-import static com.securepay.transaction.config.RabbitMQConfig.ROUTING_KEY;
+import static com.fraudshield.transaction.config.RabbitMQConfig.EXCHANGE;
+import static com.fraudshield.transaction.config.RabbitMQConfig.ROUTING_KEY;
 
 @Service
 @RequiredArgsConstructor

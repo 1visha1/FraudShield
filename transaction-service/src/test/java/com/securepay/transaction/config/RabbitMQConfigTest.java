@@ -1,8 +1,8 @@
-package com.securepay.transaction.config;
+﻿package com.fraudshield.transaction.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.transaction.event.AuthChallengeCompletedEvent;
-import com.securepay.transaction.event.TransactionBlockedEvent;
+import com.fraudshield.transaction.event.AuthChallengeCompletedEvent;
+import com.fraudshield.transaction.event.TransactionBlockedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.*;
@@ -138,7 +138,7 @@ class RabbitMQConfigTest {
                 mapper.toClass(
                         new org.springframework.amqp.core.MessageProperties() {{
                             setHeader("__TypeId__",
-                                    "com.securepay.auth.event.AuthChallengeCompletedEvent");
+                                    "com.fraudshield.auth.event.AuthChallengeCompletedEvent");
                         }}
                 )
         );
@@ -148,7 +148,7 @@ class RabbitMQConfigTest {
                 mapper.toClass(
                         new org.springframework.amqp.core.MessageProperties() {{
                             setHeader("__TypeId__",
-                                    "com.securepay.auth.event.TransactionBlockedEvent");
+                                    "com.fraudshield.auth.event.TransactionBlockedEvent");
                         }}
                 )
         );

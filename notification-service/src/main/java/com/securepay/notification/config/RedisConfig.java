@@ -1,4 +1,4 @@
-package com.securepay.notification.config;
+﻿package com.fraudshield.notification.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

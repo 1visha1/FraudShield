@@ -1,4 +1,4 @@
-server:
+﻿server:
   port: 9000
 
 spring:
@@ -6,7 +6,7 @@ spring:
     name: authorization-server
 
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/securepay?options=-c%20timezone=UTC}
+    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/fraudshield?options=-c%20timezone=UTC}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver

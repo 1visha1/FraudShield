@@ -1,16 +1,16 @@
-package com.securepay.risk.consumer;
+﻿package com.fraudshield.risk.consumer;
 
-import com.securepay.risk.entity.RiskAssessment;
-import com.securepay.risk.event.RiskAssessedEvent;
-import com.securepay.risk.event.TransactionCreatedEvent;
-import com.securepay.risk.publisher.RiskEventPublisher;
-import com.securepay.risk.repository.RiskAssessmentRepository;
-import com.securepay.risk.service.DeviceRiskCache;
-import com.securepay.risk.service.RiskCalculationService;
+import com.fraudshield.risk.entity.RiskAssessment;
+import com.fraudshield.risk.event.RiskAssessedEvent;
+import com.fraudshield.risk.event.TransactionCreatedEvent;
+import com.fraudshield.risk.publisher.RiskEventPublisher;
+import com.fraudshield.risk.repository.RiskAssessmentRepository;
+import com.fraudshield.risk.service.DeviceRiskCache;
+import com.fraudshield.risk.service.RiskCalculationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-import com.securepay.risk.config.RabbitMQConfig;
+import com.fraudshield.risk.config.RabbitMQConfig;
 
 import java.time.LocalDateTime;
 

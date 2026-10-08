@@ -1,9 +1,9 @@
-package com.securepay.transaction.consumer;
+﻿package com.fraudshield.transaction.consumer;
 
-import com.securepay.transaction.config.RabbitMQConfig;
-import com.securepay.transaction.event.AuthChallengeCompletedEvent;
-import com.securepay.transaction.event.TransactionBlockedEvent;
-import com.securepay.transaction.service.TransactionService;
+import com.fraudshield.transaction.config.RabbitMQConfig;
+import com.fraudshield.transaction.event.AuthChallengeCompletedEvent;
+import com.fraudshield.transaction.event.TransactionBlockedEvent;
+import com.fraudshield.transaction.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

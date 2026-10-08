@@ -1,8 +1,8 @@
-package com.securepay.transaction.mapper;
+﻿package com.fraudshield.transaction.mapper;
 
-import com.securepay.transaction.dto.CreateTransactionRequest;
-import com.securepay.transaction.dto.response.TransactionResponse;
-import com.securepay.transaction.entity.Transaction;
+import com.fraudshield.transaction.dto.CreateTransactionRequest;
+import com.fraudshield.transaction.dto.response.TransactionResponse;
+import com.fraudshield.transaction.entity.Transaction;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

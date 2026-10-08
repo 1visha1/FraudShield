@@ -1,8 +1,8 @@
-package com.securepay.risk.mapper;
+﻿package com.fraudshield.risk.mapper;
 
-import com.securepay.risk.dto.CreateRuleRequest;
-import com.securepay.risk.dto.response.RuleResponse;
-import com.securepay.risk.entity.FraudRule;
+import com.fraudshield.risk.dto.CreateRuleRequest;
+import com.fraudshield.risk.dto.response.RuleResponse;
+import com.fraudshield.risk.entity.FraudRule;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

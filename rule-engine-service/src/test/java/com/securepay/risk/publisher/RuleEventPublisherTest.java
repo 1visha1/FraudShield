@@ -1,6 +1,6 @@
-package com.securepay.risk.publisher;
+﻿package com.fraudshield.risk.publisher;
 
-import com.securepay.risk.event.RuleEvaluatedEvent;
+import com.fraudshield.risk.event.RuleEvaluatedEvent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -38,7 +38,7 @@ class RuleEventPublisherTest {
 
         verify(rabbitTemplate, times(1))
                 .convertAndSend(
-                        "securepay.exchange",
+                        "fraudshield.exchange",
                         "rule.evaluated",
                         event
                 );

@@ -1,4 +1,4 @@
-package com.securepay.device.dto;
+﻿package com.fraudshield.device.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

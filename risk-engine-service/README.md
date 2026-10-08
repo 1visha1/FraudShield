@@ -46,7 +46,7 @@ The **Risk Engine Service** is the first async stage in the fraud detection pipe
 risk-engine-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/risk/
+└── src/main/java/com/fraudshield/risk/
     ├── RiskEngineServiceApplication.java
     ├── config/
     │   └── RabbitMQConfig.java       # Queues and exchange declarations
@@ -148,7 +148,7 @@ RabbitMQ delivers transaction.created to risk.transaction.created.q
           |
   4. INSERT INTO risk_assessments
           |
-  5. PUBLISH risk.assessed -> securepay.exchange
+  5. PUBLISH risk.assessed -> fraudshield.exchange
 ```
 
 ---
@@ -163,7 +163,7 @@ spring:
   application:
     name: risk-engine-service
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
   data:
     redis:
       host: ${REDIS_HOST:localhost}

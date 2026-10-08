@@ -1,4 +1,4 @@
-package com.securepay.risk.util;
+﻿package com.fraudshield.risk.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

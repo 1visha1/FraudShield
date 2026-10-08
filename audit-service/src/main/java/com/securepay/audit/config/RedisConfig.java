@@ -1,6 +1,6 @@
-package com.securepay.audit.config;
+﻿package com.fraudshield.audit.config;
 
-import com.securepay.audit.service.RedisStreamConsumer;
+import com.fraudshield.audit.service.RedisStreamConsumer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;

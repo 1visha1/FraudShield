@@ -1,6 +1,6 @@
-package com.securepay.audit.service;
+﻿package com.fraudshield.audit.service;
 
-import com.securepay.audit.config.RabbitMQConfig;
+import com.fraudshield.audit.config.RabbitMQConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

@@ -1,8 +1,8 @@
-package com.securepay.transaction.config;
+﻿package com.fraudshield.transaction.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.securepay.transaction.event.AuthChallengeCompletedEvent;
-import com.securepay.transaction.event.TransactionBlockedEvent;
+import com.fraudshield.transaction.event.AuthChallengeCompletedEvent;
+import com.fraudshield.transaction.event.TransactionBlockedEvent;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE = "securepay.exchange";
+    public static final String EXCHANGE = "fraudshield.exchange";
     public static final String ROUTING_KEY = "transaction.created";
 
     public static final String CHALLENGE_COMPLETED_QUEUE = "transaction.challenge.completed.q";
@@ -115,8 +115,8 @@ public class RabbitMQConfig {
     public DefaultClassMapper classMapper() {
         DefaultClassMapper classMapper = new DefaultClassMapper();
         Map<String, Class<?>> idClassMapping = new HashMap<>();
-        idClassMapping.put("com.securepay.auth.event.AuthChallengeCompletedEvent", AuthChallengeCompletedEvent.class);
-        idClassMapping.put("com.securepay.auth.event.TransactionBlockedEvent", TransactionBlockedEvent.class);
+        idClassMapping.put("com.fraudshield.auth.event.AuthChallengeCompletedEvent", AuthChallengeCompletedEvent.class);
+        idClassMapping.put("com.fraudshield.auth.event.TransactionBlockedEvent", TransactionBlockedEvent.class);
         classMapper.setIdClassMapping(idClassMapping);
         classMapper.setTrustedPackages("*");
         return classMapper;

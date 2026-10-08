@@ -1,6 +1,6 @@
-package com.securepay.device.exception;
+﻿package com.fraudshield.device.exception;
 
-import com.securepay.device.util.ApiResponse;
+import com.fraudshield.device.util.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,4 +1,4 @@
-package com.securepay.risk.config;
+﻿package com.fraudshield.risk.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

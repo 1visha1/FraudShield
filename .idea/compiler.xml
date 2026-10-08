@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
@@ -18,7 +18,7 @@
         <module name="discovery-service" />
         <module name="notification-service" />
       </profile>
-      <profile name="Annotation profile for securepay360" enabled="true">
+      <profile name="Annotation profile for FraudShield" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -31,7 +31,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="common-events" target="1.8" />
-      <module name="securepay-common" target="1.8" />
+      <module name="fraudshield-common" target="1.8" />
       <module name="shared" target="1.5" />
       <module name="spring" target="17" />
       <module name="transaction-service" target="17" />

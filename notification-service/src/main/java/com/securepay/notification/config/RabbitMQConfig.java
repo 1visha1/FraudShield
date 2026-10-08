@@ -1,4 +1,4 @@
-package com.securepay.notification.config;
+﻿package com.fraudshield.notification.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE = "securepay.exchange";
+    public static final String EXCHANGE = "fraudshield.exchange";
 
     public static final String AUTH_CHALLENGE_QUEUE = "notification.auth.challenge.q";
     public static final String AUTH_CHALLENGE_KEY = "auth.challenge.created";
@@ -62,7 +62,7 @@ public class RabbitMQConfig {
         org.springframework.amqp.support.converter.DefaultJackson2JavaTypeMapper typeMapper = new org.springframework.amqp.support.converter.DefaultJackson2JavaTypeMapper();
         typeMapper.setTrustedPackages("*");
         java.util.Map<String, Class<?>> idClassMapping = new java.util.HashMap<>();
-        idClassMapping.put("com.securepay.auth.event.AuthChallengeCreatedEvent", com.securepay.notification.event.AuthChallengeCreatedEvent.class);
+        idClassMapping.put("com.fraudshield.auth.event.AuthChallengeCreatedEvent", com.fraudshield.notification.event.AuthChallengeCreatedEvent.class);
         typeMapper.setIdClassMapping(idClassMapping);
         converter.setJavaTypeMapper(typeMapper);
         return converter;

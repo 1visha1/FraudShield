@@ -1,8 +1,8 @@
-package com.securepay.notification.service;
+﻿package com.fraudshield.notification.service;
 
-import com.securepay.notification.config.RabbitMQConfig;
-import com.securepay.notification.event.AuthChallengeCreatedEvent;
-import com.securepay.notification.event.OTPGeneratedEvent;
+import com.fraudshield.notification.config.RabbitMQConfig;
+import com.fraudshield.notification.event.AuthChallengeCreatedEvent;
+import com.fraudshield.notification.event.OTPGeneratedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -40,6 +40,6 @@ public class NotificationService {
                 .otp(otp)
                 .build();
                 
-        rabbitTemplate.convertAndSend("securepay.exchange", "otp.generated", sentEvent);
+        rabbitTemplate.convertAndSend("fraudshield.exchange", "otp.generated", sentEvent);
     }
 }

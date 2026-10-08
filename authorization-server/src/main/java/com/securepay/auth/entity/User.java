@@ -1,4 +1,4 @@
-package com.securepay.auth.entity;
+﻿package com.fraudshield.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

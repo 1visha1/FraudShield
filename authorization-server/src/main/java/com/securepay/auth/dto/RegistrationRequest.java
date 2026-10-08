@@ -1,4 +1,4 @@
-package com.securepay.auth.dto;
+﻿package com.fraudshield.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

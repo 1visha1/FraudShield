@@ -1,8 +1,8 @@
-package com.securepay.auth.config;
+﻿package com.fraudshield.auth.config;
 
-import com.securepay.auth.event.AuthChallengeCompletedEvent;
-import com.securepay.auth.event.FraudDetectedEvent;
-import com.securepay.auth.event.OtpVerifiedEvent;
+import com.fraudshield.auth.event.AuthChallengeCompletedEvent;
+import com.fraudshield.auth.event.FraudDetectedEvent;
+import com.fraudshield.auth.event.OtpVerifiedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.Binding;
@@ -139,7 +139,7 @@ class RabbitMQConfigTest {
     @Test
     void constants_ShouldHaveExpectedValues() {
 
-        assertEquals("securepay.exchange", RabbitMQConfig.EXCHANGE);
+        assertEquals("fraudshield.exchange", RabbitMQConfig.EXCHANGE);
         assertEquals("auth.fraud.detected.q", RabbitMQConfig.FRAUD_QUEUE);
         assertEquals("fraud.detected", RabbitMQConfig.FRAUD_KEY);
 

@@ -1,6 +1,6 @@
-package com.securepay.auth.repository;
+﻿package com.fraudshield.auth.repository;
 
-import com.securepay.auth.entity.AuthSession;
+import com.fraudshield.auth.entity.AuthSession;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

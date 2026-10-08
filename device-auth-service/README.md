@@ -6,7 +6,7 @@
 
 ## Overview
 
-The **Device Auth Service** is the first line of defense in the SecurePay360 fraud detection pipeline. It receives device metadata, generates a SHA-256 fingerprint, performs a database lookup to determine device trust, caches the result in Redis, and publishes a `device.verified` event.
+The **Device Auth Service** is the first line of defense in the FraudShield fraud detection pipeline. It receives device metadata, generates a SHA-256 fingerprint, performs a database lookup to determine device trust, caches the result in Redis, and publishes a `device.verified` event.
 
 It is called **synchronously** by the Transaction Service before any fraud assessment begins.
 
@@ -50,7 +50,7 @@ It is called **synchronously** by the Transaction Service before any fraud asses
 device-auth-service/
 ├── Dockerfile
 ├── pom.xml
-└── src/main/java/com/securepay/device/
+└── src/main/java/com/fraudshield/device/
     ├── DeviceAuthServiceApplication.java
     ├── config/
     │   └── RabbitMQConfig.java
@@ -179,7 +179,7 @@ spring:
   application:
     name: device-auth-service
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/securepay}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/fraudshield}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
   data:

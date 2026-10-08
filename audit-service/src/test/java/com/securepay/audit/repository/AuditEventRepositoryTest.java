@@ -1,4 +1,4 @@
-package com.securepay.audit.repository;
+﻿package com.fraudshield.audit.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
-package com.securepay.auth.consumer;
+﻿package com.fraudshield.auth.consumer;
 
-import com.securepay.auth.event.FraudDetectedEvent;
-import com.securepay.auth.service.AuthOrchestratorService;
+import com.fraudshield.auth.event.FraudDetectedEvent;
+import com.fraudshield.auth.service.AuthOrchestratorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

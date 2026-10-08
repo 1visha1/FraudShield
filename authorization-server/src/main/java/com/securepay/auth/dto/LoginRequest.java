@@ -1,4 +1,4 @@
-package com.securepay.auth.dto;
+﻿package com.fraudshield.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;

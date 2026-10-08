@@ -1,6 +1,6 @@
-spring:
+﻿spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/securepay
+    url: jdbc:postgresql://postgres:5432/fraudshield
     username: postgres
     password: postgres
   rabbitmq:
@@ -18,7 +18,7 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:postgresql://postgres:5432/securepay
+    url: jdbc:postgresql://postgres:5432/fraudshield
   rabbitmq:
     host: localhost
 eureka:
